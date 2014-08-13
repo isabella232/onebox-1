@@ -10,7 +10,7 @@ module Onebox
     end
 
     def data
-      engine.data
+      engine.send(:data)
     end
 
     def to_s
