@@ -1,6 +1,7 @@
 module Onebox
   class Preview
     attr_reader :cache
+    attr_reader :url
 
     def initialize(link, parameters = Onebox.options)
       @url = link
