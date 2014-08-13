@@ -9,6 +9,10 @@ module Onebox
       @engine_class = Matcher.new(@url).oneboxed
     end
 
+    def data
+      engine.data
+    end
+
     def to_s
       return "" unless engine
       process_html(engine_html)
