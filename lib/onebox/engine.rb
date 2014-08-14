@@ -97,6 +97,7 @@ end
 require_relative "helpers"
 require_relative "layout_support"
 require_relative "engine/standard_embed"
+require_relative "engine/html_embed"
 require_relative "engine/html"
 require_relative "engine/json"
 require_relative "engine/amazon_onebox"
@@ -116,3 +117,5 @@ require_relative "engine/whitelisted_generic_onebox"
 require_relative "engine/pubmed_onebox"
 require_relative "engine/video_onebox"
 require_relative "engine/audio_onebox"
+# custom engines
+require_relative "engine/ikea_onebox"

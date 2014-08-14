@@ -58,7 +58,6 @@ module Onebox
           huffingtonpost.ca
           hulu.com
           ign.com
-          ikea.com
           imgur.com
           indiatimes.com
           instagr.am
