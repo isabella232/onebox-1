@@ -36,16 +36,11 @@ module Onebox
         end
       end
 
-      def price
-        @price ||= (raw.css("#priceblock_ourprice").text || raw.css(".priceLarge").inner_text || "").strip
-      end
-
       def data
         result = { link: link,
                    title: raw.css("h1").inner_text,
                    image: image,
-                   price: price,
-                   price_cents: Monetize.parse(price).cents }
+                   price: raw.css(".priceLarge").inner_text }
 
         result[:by_info] = raw.at("#by-line")
         result[:by_info] = Onebox::Helpers.clean(result[:by_info].inner_html) if result[:by_info]
