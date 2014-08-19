@@ -119,6 +119,7 @@ require_relative "engine/video_onebox"
 require_relative "engine/audio_onebox"
 # custom engines
 require_relative "engine/allmodern_onebox"
+require_relative "engine/crate_and_barrel_onebox"
 require_relative "engine/ikea_onebox"
 require_relative "engine/one_kings_lane_onebox"
 require_relative "engine/overstock_onebox"
