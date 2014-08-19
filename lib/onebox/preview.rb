@@ -11,7 +11,7 @@ module Onebox
     end
 
     def data
-      engine.send(:data)
+      engine.try(:send, :data)
     end
 
     def to_s
