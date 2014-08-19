@@ -1,10 +1,10 @@
 module Onebox
   module Engine
-    class AllmodernOnebox
+    class CrateAndBarrelOnebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^http:\/\/(?:www)\.allmodern\.com\//)
+      matches_regexp(/^http:\/\/(?:www)\.crateandbarrel\.com\//)
 
       def data
         if og_raw.is_a?(Hash)
