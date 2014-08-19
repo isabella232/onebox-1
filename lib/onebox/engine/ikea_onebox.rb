@@ -4,7 +4,7 @@ module Onebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^http:\/\/(?:www)\.ikea\.com\/us\/en\//)
+      matches_regexp(/(www.|http:\/\/(www.)?|https:\/\/(www.)?)?ikea\.com\/us\/en\//)
 
       def data
         if og_raw.is_a?(Hash)
