@@ -18,7 +18,7 @@ module Onebox
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
           description: og_raw.description,
           type: (og_raw.type if og_raw.type),
-          price_cents: Monetize.parse(raw.css('#_familyPrice > span > span.regPrice')[0]).cents.to_s
+          price_cents: Monetize.parse(raw.css('#_productPrice span.regPrice')[0]).cents.to_s
         }
       end
     end
