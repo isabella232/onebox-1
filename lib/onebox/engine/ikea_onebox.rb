@@ -6,18 +6,18 @@ module Onebox
 
       matches_regexp(/^http:\/\/(?:www)\.ikea\.com\/us\/en\//)
 
+      def title
+        raw.xpath("/html/head").xpath('//meta[@name="product_name"]/@content').first.value
+      end
+
+      def keywords
+        raw.xpath("/html/head").xpath('//meta[@name="keywords"]/@content').first.value
+      end
+
       def data
         if og_raw.is_a?(Hash)
           og_raw[:link] ||= link
           return og_raw
-        end
-
-        def title
-          raw.xpath("/html/head").xpath('//meta[@name="product_name"]/@content').first.value
-        end
-
-        def keywords
-          raw.xpath("/html/head").xpath('//meta[@name="keywords"]/@content').first.value
         end
 
         {
