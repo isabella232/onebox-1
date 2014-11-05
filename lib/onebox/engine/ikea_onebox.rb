@@ -12,11 +12,19 @@ module Onebox
           return og_raw
         end
 
+        def title
+          raw.xpath("/html/head").xpath('//meta[@name="product_name"]/@content').first.value
+        end
+
+        def keywords
+          raw.xpath("/html/head").xpath('//meta[@name="keywords"]/@content').first.value
+        end
+
         {
           link: link,
-          title: og_raw.title,
+          title: title,
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
-          description: og_raw.description,
+          description: og_raw.description.gsub(/IKEA - #{keywords}, , /, ""),
           type: (og_raw.type if og_raw.type),
           price_cents: Monetize.parse(raw.xpath("/html/head").xpath('//meta[@name="price"]/@content').first.value).cents.to_s
         }
