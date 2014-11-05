@@ -24,7 +24,7 @@ module Onebox
           link: link,
           title: title,
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
-          description: og_raw.description.gsub(/IKEA - #{keywords}, , /, ""),
+          description: og_raw.description.gsub(/IKEA - #{keywords}, /, ""),
           type: (og_raw.type if og_raw.type),
           price_cents: Monetize.parse(raw.xpath("/html/head").xpath('//meta[@name="price"]/@content').first.value).cents.to_s
         }
