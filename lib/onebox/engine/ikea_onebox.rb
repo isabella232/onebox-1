@@ -6,10 +6,6 @@ module Onebox
 
       matches_regexp(/^http:\/\/(?:www)\.ikea\.com\/us\/en\//)
 
-      def title
-        raw.xpath("/html/head").xpath('//meta[@name="product_name"]/@content').first.value
-      end
-
       def keywords
         raw.xpath("/html/head").xpath('//meta[@name="keywords"]/@content').first.value
       end
@@ -22,7 +18,7 @@ module Onebox
 
         {
           link: link,
-          title: title,
+          title: keywords,
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
           description: og_raw.description.gsub(/IKEA - #{keywords}, /, ""),
           type: (og_raw.type if og_raw.type),
