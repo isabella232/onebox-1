@@ -14,7 +14,12 @@ module Onebox
 
       def description
         if raw.css('div.description.toggle-content').any?
-          CGI::unescapeHTML(raw.css('div.description.toggle-content').inner_html.gsub(/<\/?[^>]*>/," ")).gsub(/#{Regexp.quote(itemnumber)}|(\r)/,'').gsub(/\s+/, " ").gsub(/^\s*|(\s*$)/, "")
+          escaped = raw.css('div.description.toggle-content').inner_html.
+            gsub(/<\/?[^>]*>/, " ").
+            gsub(/#{Regexp.quote(itemnumber)}|(\r)/, "").
+            gsub(/\s+/, " ").
+            gsub(/^\s*|(\s*$)/, "")
+          CGI::unescapeHTML(escaped)
         end
       end
 
