@@ -4,7 +4,28 @@ module Onebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^https:\/\/(?:www)\.overstock\.com\//)
+      matches_regexp(/^http:\/\/(?:www)\.overstock\.com\//)
+
+      def itemnumber
+        if raw.css('.description-item-number').any?
+          raw.css('.description-item-number')[0].inner_text
+        end
+      end
+
+      def description
+        if raw.css('div.description.toggle-content').any?
+          escaped = raw.css('div.description.toggle-content').inner_html.
+            gsub(/<\/?[^>]*>/, " ").
+            gsub(/#{Regexp.quote(itemnumber)}|(\r)/, "").
+            gsub(/\s+/, " ").
+            gsub(/^\s*|(\s*$)/, "")
+          CGI::unescapeHTML(escaped)
+        end
+      end
+
+      def productname
+        og_raw.title.gsub(/ \|.*/, "")
+      end
 
       def data
         if og_raw.is_a?(Hash)
@@ -14,9 +35,9 @@ module Onebox
 
         {
           link: link,
-          title: og_raw.title,
+          title: productname,
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
-          description: raw.xpath("/html/head").xpath('//meta[@name="description"]/@content').first.value.gsub(/\u0099/, ""),
+          description: description,
           type: (og_raw.type if og_raw.type),
           price_cents: Monetize.parse(raw.xpath('//span[@itemprop="price"]').children).cents.to_s
         }
