@@ -4,7 +4,7 @@ module Onebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^https:\/\/(?:www)\.overstock\.com\//)
+      matches_regexp(/^http:\/\/(?:www)\.overstock\.com\//)
 
       def itemnumber
         if raw.css('.description-item-number').any?
