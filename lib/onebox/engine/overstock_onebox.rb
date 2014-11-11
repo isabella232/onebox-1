@@ -23,6 +23,10 @@ module Onebox
         end
       end
 
+      def productname
+        og_raw.title.gsub(/ \|.*/, "")
+      end
+
       def data
         if og_raw.is_a?(Hash)
           og_raw[:link] ||= link
@@ -31,7 +35,7 @@ module Onebox
 
         {
           link: link,
-          title: og_raw.title,
+          title: productname,
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
           description: description,
           type: (og_raw.type if og_raw.type),
