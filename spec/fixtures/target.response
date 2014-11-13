@@ -3944,7 +3944,7 @@ $(document).ready(function() {
                     overlayType: 'modal',
                     width: overlayWidth,
                     data: dataObj,
-                    curtain: true,
+                    curtain: true,
                     target: $("#addToCart")
                   });
 
