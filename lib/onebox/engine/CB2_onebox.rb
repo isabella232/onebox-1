@@ -7,12 +7,9 @@ module Onebox
       matches_regexp(/^http:\/\/(?:www)\.cb2\.com\//)
 
       def price
-        price_main = raw.css('span.regPrice')[0]
-        if 1 == 9
-          "RANGE"
-        else
-          # Monetize.parse(price_main).cents.to_s
-          price_main
+        price_main = raw.css('#_productWrap span.regPrice')[0]
+        unless price_main.inner_html.include? "-"
+          Monetize.parse(price_main).cents.to_s
         end
       end
 

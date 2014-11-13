@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Onebox::Engine::TargetOnebox do
-  let(:link) { "http://www.target.com/p/natural-dining-collection/-/A-16368287" }
+  let(:link) { "http://www.target.com/p/caribbean-patio-hammock-chair/-/A-14516270" }
   let(:json) { described_class.new(link).data }
 
   before do
@@ -11,12 +11,12 @@ describe Onebox::Engine::TargetOnebox do
   it "should return a list of product attributes" do
     expect(json).to eq(
       {
-        link: "http://www.target.com/p/natural-dining-collection/-/A-16368287",
-        title: "Natural Dining Collection",
-        image: "http://Img3.targetimg3.com/wcsstore/TargetSAS//img/p/16/36/16368287_201409082103_100x100.jpg",
-        description: "Natural Dining Collection",
+        link: "http://www.target.com/p/caribbean-patio-hammock-chair/-/A-14516270",
+        title: "Caribbean Patio Hammock Chair",
+        image: "http://Img1.targetimg1.com/wcsstore/TargetSAS//img/p/14/51/14516270_130402183000_100x100.jpg",
+        description: "Enjoy the perfect place to read, relax, nap or catch some rays with the Caribbean patio hammock chair. Made from soft, tightly-woven polyester rope, it allows you to stretch out, curl up and everything in between. This burgundy hammock chair's 44-inch spreader bar holds it open for easy entrance and exit. Chair stands and hanging hardware are sold separately.",
         type: "product",
-        price_cents: nil
+        price_cents: "6099"
       }
     )
   end
