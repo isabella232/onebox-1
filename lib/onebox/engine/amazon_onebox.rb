@@ -42,7 +42,7 @@ module Onebox
 
       def data
         result = { link: link,
-                   title: raw.css("h1").inner_text.gsub(/(About this item).?/, ""),
+                   title: raw.css("h1").inner_text.gsub(/(About this item).*/, ""),
                    image: image,
                    price_cents: Monetize.parse(price).cents }
 
