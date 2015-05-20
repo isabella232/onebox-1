@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Onebox::Engine::TargetOnebox do
-  let(:link) { "http://www.target.com/p/mirrored-side-table/-/A-11247062" }
+  let(:link) { "http://www.target.com/p/caribbean-patio-hammock-chair/-/A-14516270" }
   let(:json) { described_class.new(link).data }
 
   before do
@@ -11,12 +11,12 @@ describe Onebox::Engine::TargetOnebox do
   it "should return a list of product attributes" do
     expect(json).to eq(
       {
-        link: "http://www.target.com/p/mirrored-side-table/-/A-11247062",
-        title: "Mirrored Side Table",
-        image: "http://Img2.targetimg2.com/wcsstore/TargetSAS//img/p/11/24/11247062_100x100.jpg",
-        description: "This eye&#45;catching side table is sure to be a conversation piece when placed in your living room or bedroom&#46; The mirrored finish on a steel frame make this small contemporary accent piece truly stand out&#46;",
+        link: "http://www.target.com/p/caribbean-patio-hammock-chair/-/A-14516270",
+        title: "Caribbean Patio Hammock Chair",
+        image: "http://Img1.targetimg1.com/wcsstore/TargetSAS//img/p/14/51/14516270_130402183000_100x100.jpg",
+        description: "Enjoy the perfect place to read, relax, nap or catch some rays with the Caribbean patio hammock chair. Made from soft, tightly-woven polyester rope, it allows you to stretch out, curl up and everything in between. This burgundy hammock chair's 44-inch spreader bar holds it open for easy entrance and exit. Chair stands and hanging hardware are sold separately.",
         type: "product",
-        price_cents: "9999"
+        price_cents: "6099"
       }
     )
   end

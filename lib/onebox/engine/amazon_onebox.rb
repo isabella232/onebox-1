@@ -42,9 +42,8 @@ module Onebox
 
       def data
         result = { link: link,
-                   title: raw.css("h1").inner_text,
+                   title: raw.css("h1").inner_text.gsub(/(About this item).*/, ""),
                    image: image,
-                   price: price,
                    price_cents: Monetize.parse(price).cents }
 
         result[:by_info] = raw.at("#by-line")

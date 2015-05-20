@@ -29,12 +29,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 2.14"
   spec.add_development_dependency "yard", "~> 0.8"
   spec.add_development_dependency "fakeweb", "~> 1.3"
-  spec.add_development_dependency "pry", "~> 0.9"
+  spec.add_development_dependency "pry", "~> 0.9.12.6"
   spec.add_development_dependency "mocha", "~> 0.14"
   spec.add_development_dependency "rubocop", "~> 0.11"
   spec.add_development_dependency "twitter", "~> 4.8"
   spec.add_development_dependency "guard-rspec", "~> 4.2.8"
-  spec.add_development_dependency "pry", "~> 0.10.0"
   # listen current is a bit broken
   # http://stackoverflow.com/questions/21319753/readline-seems-to-be-broken
   spec.add_development_dependency "listen", "= 2.6.0"
