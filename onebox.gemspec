@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "mustache", "~> 0.99"
   spec.add_runtime_dependency "nokogiri", "~> 1.6.1"
   spec.add_runtime_dependency "moneta", "~> 0.7"
-  spec.add_runtime_dependency "monetize", "~> 0.3.0"
+  spec.add_runtime_dependency "monetize", "~> 1.3.0"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake", "~> 10.0"
