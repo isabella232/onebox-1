@@ -7,35 +7,23 @@ module Onebox
       matches_regexp(/^http:\/\/(?:www)\.wayfair\.com\//)
 
       def title
-        if og_raw.title
-          og_raw.title
-        else
-          raw.css('#bd > div.prodnameshare > h1').inner_html.gsub(/<[^>]+>/, '').gsub(/\n/, '').gsub(/\s{2,}/, '')
-        end
+        return og_raw.title if og_raw.title
+        raw.css('#bd > div.prodnameshare > h1').inner_html.gsub(/<[^>]+>/, '').gsub(/\n/, '').gsub(/\s{2,}/, '')
       end
 
       def price
-        if raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content').empty?
-          nil
-        else
-          Monetize.parse(raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content')).cents.to_s
-        end
+        return nil if raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content').empty?
+        Monetize.parse(raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content')).cents.to_s
       end
 
       def image
-        if og_raw.images && og_raw.images.first
-          og_raw.images.first
-        else
-          product_main_img = raw.css('img.product_main_img').first['src']
-        end
+        return og_raw.images.first if og_raw.images && og_raw.images.first
+        raw.css('img.product_main_img').first['src']
       end
 
       def description
-        if og_raw.description
-          og_raw.description
-        else
-          raw.xpath('/html/head').xpath('//meta[@name="description"]/@content').first.value.gsub(/<[^>]+>/, '')
-        end
+        return og_raw.description if og_raw.description
+        raw.xpath('/html/head').xpath('//meta[@name="description"]/@content').first.value.gsub(/<[^>]+>/, '')
       end
 
       def type
