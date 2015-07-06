@@ -8,12 +8,13 @@ module Onebox
 
       def title
         return og_raw.title if og_raw.title
-        raw.css('#bd > div.prodnameshare > h1').inner_html.gsub(/<[^>]+>/, '').gsub(/\n/, '').gsub(/\s{2,}/, '')
+        raw.css('#bd > div.prodnameshare > h1').inner_html.gsub(/<[^>]+>|\n|\s{2,}/, '')
       end
 
       def price
-        return nil if raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content').empty?
-        Monetize.parse(raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content')).cents.to_s
+        amount = raw.xpath('/html/head/meta[@property="og:price:amount"]/@content')
+        return nil if amount.empty?
+        Monetize.parse(amount).cents.to_s
       end
 
       def image
@@ -23,7 +24,7 @@ module Onebox
 
       def description
         return og_raw.description if og_raw.description
-        raw.xpath('/html/head').xpath('//meta[@name="description"]/@content').first.value.gsub(/<[^>]+>/, '')
+        raw.xpath('/html/head/meta[@name="description"]/@content').first.value.gsub(/<[^>]+>/, '')
       end
 
       def type
