@@ -8,8 +8,7 @@ module Onebox
 
       def title
         if og_raw.title
-          # og_raw.title
-          "no"
+          og_raw.title
         else
           raw.css('#bd > div.prodnameshare > h1').inner_html.gsub(/<[^>]+>/, '').gsub(/\n/, '').gsub(/\s{2,}/, '')
         end
@@ -40,11 +39,7 @@ module Onebox
       end
 
       def type
-        if og_raw.type
-          og_raw.type
-        else
-          nil
-        end
+        og_raw.type
       end
 
       def data
