@@ -8,10 +8,8 @@ module Onebox
 
       def price
         price_main = raw.css('#price_main > div > p > span.offerPrice')
-        price_range = raw.css('span.pricelist')
-        if price_range.inner_html.empty?
-          Monetize.parse(price_main).cents.to_s
-        end
+        return nil if price_main.inner_html.include? "-"
+        Monetize.parse(price_main).cents.to_s
       end
 
       def data
