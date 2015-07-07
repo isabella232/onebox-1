@@ -8,10 +8,12 @@ module Onebox
 
       def price
         price_main = raw.css('#price_main > div > p > span.offerPrice')
-        price_range = raw.css('span.pricelist')
-        if price_range.inner_html.empty?
-          Monetize.parse(price_main).cents.to_s
-        end
+        return nil if price_main.inner_html.include? "-"
+        Monetize.parse(price_main).cents.to_s
+      end
+
+      def description
+        HTMLEntities.new.decode(og_raw.description).gsub(/<[^>]+>/, '')
       end
 
       def data
@@ -24,7 +26,7 @@ module Onebox
           link: link,
           title: og_raw.title,
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
-          description: CGI::unescapeHTML(og_raw.description),
+          description: description,
           type: (og_raw.type if og_raw.type),
           price_cents: price
         }
