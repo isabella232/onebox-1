@@ -6,6 +6,31 @@ module Onebox
 
       matches_regexp(/^http:\/\/(?:www)\.wayfair\.com\//)
 
+      def title
+        return og_raw.title if og_raw.title
+        raw.css('#bd > div.prodnameshare > h1').inner_html.gsub(/<[^>]+>|\n|\s{2,}/, '')
+      end
+
+      def price
+        amount = raw.xpath('/html/head/meta[@property="og:price:amount"]/@content')
+        return nil if amount.empty?
+        Monetize.parse(amount).cents.to_s
+      end
+
+      def image
+        return og_raw.images.first if og_raw.images && og_raw.images.first
+        raw.css('img.product_main_img').first['src']
+      end
+
+      def description
+        return og_raw.description if og_raw.description
+        raw.xpath('/html/head/meta[@name="description"]/@content').first.value.gsub(/<[^>]+>/, '')
+      end
+
+      def type
+        og_raw.type
+      end
+
       def data
         if og_raw.is_a?(Hash)
           og_raw[:link] ||= link
@@ -14,11 +39,11 @@ module Onebox
 
         {
           link: link,
-          title: og_raw.title,
-          image: (og_raw.images.first if og_raw.images && og_raw.images.first),
-          description: og_raw.description,
-          type: (og_raw.type if og_raw.type),
-          price_cents: Monetize.parse(raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content').first.value).cents.to_s
+          title: title,
+          image: image,
+          description: description,
+          type: type,
+          price_cents: price
         }
       end
     end
