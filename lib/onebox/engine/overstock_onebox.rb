@@ -24,7 +24,9 @@ module Onebox
       end
 
       def productname
-        og_raw.title.gsub(/ \|.*/, "")
+        return og_raw.title.gsub(/ \|.*/, "") if og_raw.title
+        return raw.css('title').inner_html.gsub(/ \|.*/, "") if raw.css('title').any?
+        nil
       end
 
       def data
