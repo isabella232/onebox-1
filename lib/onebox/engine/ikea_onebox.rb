@@ -23,7 +23,9 @@ module Onebox
       end
 
       def price
-        Monetize.parse(raw.xpath('/html/head/meta[@name="price"]/@content').first.value).cents.to_s
+        amount = raw.xpath('/html/head/meta[@name="price"]/@content')
+        return nil if amount.empty?
+        Monetize.parse(amount).cents.to_s
       end
 
       def data
