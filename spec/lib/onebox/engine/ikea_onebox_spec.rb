@@ -12,11 +12,11 @@ describe Onebox::Engine::IkeaOnebox do
     expect(json).to eq(
       {
         link: "http://www.ikea.com/us/en/catalog/products/S89826677/",
-        title: "AKURUM, Base cab for DOMSJÖ 2 bowl sink",
-        image: "http://www.ikea.com/us/en/images/products/akurum-base-cab-for-domsjo--bowl-sink__28343_PE114994_S4.JPG",
-        description: "white, Ädel medium brown, 36",
+        title: "BERNHARD, Bar stool with backrest",
+        image: "http://www.ikea.com/us/en/images/products/bernhard-bar-stool-with-backrest-yellow__0243102_PE382439_S4.JPG",
+        description: "You sit comfortably thanks to the restful flexibility of the seat.You sit comfortably thanks to the padded seat.Soft, hardwearing and easy care leather, which ages gracefully.",
         type: "product",
-        price_cents: "19500"
+        price_cents: "16900"
       }
     )
   end
