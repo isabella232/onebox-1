@@ -14,7 +14,7 @@ describe Onebox::Engine::AllmodernOnebox do
         link: "http://www.allmodern.com/Rizzy-Home-Reversible-Pillow-T0-RZY2682.html",
         title: "Rizzy Home Reversible Pillow",
         image: "http://img2.wfrcdn.com/lf/48/hash/11575/6725741/1/Rizzy-Home-Reversible-Pillow.jpg",
-        description: "        Features:                  Printing details with reversible pattern                                  ",
+        description: nil,
         type: "wayfairus:product",
         price_cents: "2902"
       }
