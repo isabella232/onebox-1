@@ -24,7 +24,7 @@ module Onebox
 
       def price
         amount = raw.xpath('/html/head/meta[@name="price"]/@content')
-        amount.any? && Monetize.parse(amount).cents.to_s
+        !amount.empty? && Monetize.parse(amount).cents.to_s
       end
 
       def data
