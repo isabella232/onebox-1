@@ -2,7 +2,6 @@ module Onebox
   module Engine
     module HTMLEmbed
       # include HTML
-      require 'htmlentities'
 
       private
 
