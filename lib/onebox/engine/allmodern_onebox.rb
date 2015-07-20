@@ -7,31 +7,28 @@ module Onebox
       matches_regexp(/^http:\/\/(?:www)\.allmodern\.com\//)
 
       def title
-        return og_raw.title if og_raw.title
-        return raw.css('span.title_name').inner_html if raw.css('span.title_name').any?
-        nil
+        og_raw.title || raw.css('span.title_name').inner_html
       end
 
       def image
-        return og_raw.images.first if og_raw.images && og_raw.images.first
-        raw.css('img.product_main_img').first['src']
+        og_raw.images && og_raw.images.first || raw.css('img.product_main_img').first['src']
       end
 
       def description
-        return HTMLEntities.new.decode(raw.css(".pdp_romance_copy")[0].inner_html).
+        return unless raw.css(".pdp_romance_copy").any?
+
+        HTMLEntities.new.decode(raw.css(".pdp_romance_copy")[0].inner_html).
           gsub(/<[^>]+>|\s{2,}/,' ').
-          gsub(/^\s+|\s+$/,'') if raw.css(".pdp_romance_copy").any?
+          gsub(/^\s+|\s+$/,'')
       end
 
       def type
-        return og_raw.type if og_raw.type
-        nil
+        og_raw.type
       end
 
       def price
         amount = raw.xpath('/html/head/meta[@property="og:price:amount"]/@content')
-        return nil if amount.empty?
-        Monetize.parse(amount).cents.to_s
+        amount && Monetize.parse(amount).cents.to_s
       end
 
       def data
