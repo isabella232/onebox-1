@@ -6,10 +6,29 @@ module Onebox
 
       matches_regexp(/^http:\/\/(?:www)\.allmodern\.com\//)
 
+      def title
+        og_raw.title || raw.css('span.title_name').inner_html
+      end
+
+      def image
+        og_raw.images && og_raw.images.first || raw.css('img.product_main_img').first['src']
+      end
+
       def description
-        if raw.css(".prod_features").any?
-          raw.css(".prod_features")[0].inner_text.gsub("\n",'')
-        end
+        return unless raw.css(".pdp_romance_copy").any?
+
+        HTMLEntities.new.decode(raw.css(".pdp_romance_copy")[0].inner_html).
+          gsub(/<[^>]+>|\s{2,}/,' ').
+          gsub(/^\s+|\s+$/,'')
+      end
+
+      def type
+        og_raw.type
+      end
+
+      def price
+        amount = raw.xpath('/html/head/meta[@property="og:price:amount"]/@content')
+        !amount.empty? && Monetize.parse(amount).cents.to_s
       end
 
       def data
@@ -20,11 +39,11 @@ module Onebox
 
         {
           link: link,
-          title: og_raw.title,
-          image: (og_raw.images.first if og_raw.images && og_raw.images.first),
+          title: title,
+          image: image,
           description: description,
-          type: (og_raw.type if og_raw.type),
-          price_cents: Monetize.parse(raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content').first.value).cents.to_s
+          type: type,
+          price_cents: price
         }
       end
     end
