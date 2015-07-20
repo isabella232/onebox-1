@@ -11,21 +11,20 @@ module Onebox
       end
 
       def image
-        return og_raw.images.first if og_raw.images && og_raw.images.first
+        og_raw.images && og_raw.images.first
       end
 
       def description
-        return og_raw.description.gsub(/IKEA - #{Regexp.quote(keywords)}, /, "") if og_raw.description
+        og_raw.description.gsub(/IKEA - #{Regexp.quote(keywords)}, /, "") if og_raw.description
       end
 
       def type
-        return og_raw.type if og_raw.type
+        og_raw.type
       end
 
       def price
         amount = raw.xpath('/html/head/meta[@name="price"]/@content')
-        return nil if amount.empty?
-        Monetize.parse(amount).cents.to_s
+        amount.any? && Monetize.parse(amount).cents.to_s
       end
 
       def data
