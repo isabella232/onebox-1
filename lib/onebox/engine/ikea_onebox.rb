@@ -7,7 +7,24 @@ module Onebox
       matches_regexp(/^http:\/\/(?:www)\.ikea\.com\/us\/en\//)
 
       def keywords
-        raw.xpath("/html/head").xpath('//meta[@name="keywords"]/@content').first.value
+        raw.xpath('/html/head/meta[@name="keywords"]/@content').first.value
+      end
+
+      def image
+        og_raw.images && og_raw.images.first
+      end
+
+      def description
+        og_raw.description.gsub(/IKEA - #{Regexp.quote(keywords)}, /, "") if og_raw.description
+      end
+
+      def type
+        og_raw.type
+      end
+
+      def price
+        amount = raw.xpath('/html/head/meta[@name="price"]/@content')
+        !amount.empty? && Monetize.parse(amount).cents.to_s
       end
 
       def data
@@ -19,10 +36,10 @@ module Onebox
         {
           link: link,
           title: keywords,
-          image: (og_raw.images.first if og_raw.images && og_raw.images.first),
-          description: og_raw.description.gsub(/IKEA - #{Regexp.quote(keywords)}, /, ""),
-          type: (og_raw.type if og_raw.type),
-          price_cents: Monetize.parse(raw.xpath("/html/head").xpath('//meta[@name="price"]/@content').first.value).cents.to_s
+          image: image,
+          description: description,
+          type: type,
+          price_cents: price
         }
       end
     end
