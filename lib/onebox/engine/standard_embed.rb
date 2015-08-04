@@ -2,27 +2,64 @@ module Onebox
   module Engine
     module StandardEmbed
 
+      def self.oembed_providers
+        @@oembed_providers ||= {}
+      end
+
+      def self.opengraph_providers
+        @@opengraph_providers ||= Array.new
+      end
+
+      def self.add_oembed_provider(regexp, endpoint)
+        oembed_providers[regexp] = endpoint
+      end
+
+      def self.add_opengraph_provider(regexp)
+        opengraph_providers.push(regexp)
+      end
+
+      # Some oembed providers (like meetup.com) don't provide links to themselves
+      add_oembed_provider /www\.flickr\.com\//, 'http://www.flickr.com/services/oembed.json'
+      add_oembed_provider /(.*\.)?gfycat\.com\//, 'http://gfycat.com/cajax/oembed'
+      add_oembed_provider /www\.kickstarter\.com\//, 'https://www.kickstarter.com/services/oembed'
+      add_oembed_provider /www\.meetup\.com\//, 'http://api.meetup.com/oembed'
+      add_oembed_provider /www\.ted\.com\//, 'http://www.ted.com/services/v1/oembed.json'
+      add_oembed_provider /(.*\.)?vimeo\.com\//, 'http://vimeo.com/api/oembed.json'
+
+      # Sites that work better with OpenGraph
+      # add_opengraph_provider /gfycat\.com\//
+
+      def always_https?
+        WhitelistedGenericOnebox.host_matches(uri, WhitelistedGenericOnebox.https_hosts)
+      end
+
       def raw
         return @raw if @raw
-        response = fetch_response(url)
 
-        html_doc = Nokogiri::HTML(response.body)
-
-        # Determine if we should use OEmbed or OpenGraph
-        oembed_alternate = html_doc.at("//link[@type='application/json+oembed']") || html_doc.at("//link[@type='text/json+oembed']")
-        if oembed_alternate
-          # If the oembed request fails, we can still try the opengraph below.
-          begin
-            @raw = Onebox::Helpers.symbolize_keys(::MultiJson.load(fetch_response(oembed_alternate['href']).body))
-          rescue Errno::ECONNREFUSED, Net::HTTPError, MultiJson::LoadError
-            @raw = nil
+        StandardEmbed.oembed_providers.each do |regexp, endpoint|
+          if url =~ regexp
+            fetch_oembed_raw("#{endpoint}?url=#{url}")
+            return @raw if @raw
           end
         end
+
+        response = Onebox::Helpers.fetch_response(url)
+        html_doc = Nokogiri::HTML(response.body)
+
+        StandardEmbed.opengraph_providers.each do |regexp|
+          if url =~ regexp
+            @raw = parse_open_graph(html_doc, url)
+            return @raw if @raw
+          end
+        end
+
+        # Determine if we should use oEmbed or OpenGraph (prefers oEmbed)
+        oembed_alternate = html_doc.at("//link[@type='application/json+oembed']") || html_doc.at("//link[@type='text/json+oembed']")
+        fetch_oembed_raw(oembed_alternate)
 
         open_graph = parse_open_graph(html_doc, url)
         if @raw
           @raw[:image] = open_graph.images.first if @raw[:image].nil? && open_graph && open_graph.images
-
           return @raw
         end
 
@@ -31,9 +68,17 @@ module Onebox
 
       private
 
-      def parse_open_graph(html, url)
+      def fetch_oembed_raw(oembed_url)
+        return unless oembed_url
+        oembed_url = oembed_url['href'] unless oembed_url['href'].nil?
+        @raw = Onebox::Helpers.symbolize_keys(::MultiJson.load(Onebox::Helpers.fetch_response(oembed_url).body))
+      rescue Errno::ECONNREFUSED, Net::HTTPError, MultiJson::LoadError
+        @raw = nil
+      end
+
+      def parse_open_graph(html, og_url)
         og = Struct.new(:url, :type, :title, :description, :images, :metadata, :html).new
-        og.url = url
+        og.url = og_url
         og.images = []
         og.metadata = {}
 
@@ -48,7 +93,7 @@ module Onebox
               image_uri = URI.parse(m_content) rescue nil
               if image_uri
                 if image_uri.host.nil?
-                  image_uri.host = URI.parse(url).host
+                  image_uri.host = URI.parse(og_url).host
                 end
                 og.images.push image_uri.to_s
               end
@@ -60,31 +105,6 @@ module Onebox
 
         og
       end
-
-      def fetch_response(location, limit = 5, domain = nil)
-        raise Net::HTTPError.new('HTTP redirect too deep', location) if limit == 0
-
-        uri = URI(location)
-        if !uri.host
-          uri = URI("#{domain}#{location}")
-        end
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.open_timeout = Onebox.options.connect_timeout
-        http.read_timeout = Onebox.options.timeout
-        if uri.is_a?(URI::HTTPS)
-          http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        end
-        response = http.request_get(uri.request_uri)
-
-        case response
-        when Net::HTTPSuccess     then response
-        when Net::HTTPRedirection then fetch_response(response['location'], limit - 1, "#{uri.scheme}://#{uri.host}")
-        else
-          response.error!
-        end
-      end
-
     end
   end
 end

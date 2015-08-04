@@ -72,12 +72,22 @@ preview = Onebox.preview(url)
 "#{preview}" == preview.to_s #=> true
 ```
 
+Development Preview Interface
+=============================
+
+The onebox gem comes with a development server for previewing the results
+of your changes. You can run it by running `rake server` after checking
+out the project. You can then try out URLs.
+
+The server doesn't reload code changes automatically (PRs accepted!) so
+make sure to hit CTRL-C and restart the server to try a code change out.
+
 
 Adding Support for a new URL
 ============================
 
   1. Check if the site supports [oEmbed](http://oembed.com/) or [Open Graph](https://developers.facebook.com/docs/opengraph/).
-     If it does, you can probably get away with just whitelisting the URL in `Onebox::Engine::WhitelistedGenericOnebox`.
+     If it does, you can probably get away with just whitelisting the URL in `Onebox::Engine::WhitelistedGenericOnebox` (see: [Whitelisted Generic Onebox caveats](#user-content-whitelisted-generic-onebox-caveats)).
      If the site does not support open standards, you can create a new engine.
 
   2. Create new onebox engine
@@ -166,13 +176,23 @@ Adding Support for a new URL
     ```
 
 
+Whitelisted Generic Onebox caveats
+==================================
+
+The Whitedlisted Generic Onebox has some caveats for it's use, beyond simply whitelisting the domain.
+
+  1. The domain must be whitelisted
+  2. The URL you're oneboxing cannot be a root url (e.g. `http://example.com` won't work, but `http://example.com/page` will)
+  3. If the oneboxed URL responds with oEmbed and has a `rich` type: the `html` content must contain an `<iframe>`. Responses without an iframe will not be oneboxed.
+
+
 Installing
 ==========
 
 Add this line to your application's Gemfile:
 
-    gem "onebox", "~> 1.2"
-    
+    gem "onebox"
+
 And then execute:
 
     $ bundle
@@ -181,6 +201,12 @@ Or install it yourself as:
 
     $ gem install onebox
 
+
+Issues / Discussion
+===================
+
+Discussion of the Onebox gem, its development and features should be done on
+[Discourse Meta](https://meta.discourse.org). 
 
 Contributing
 ============

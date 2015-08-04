@@ -16,7 +16,7 @@ describe Onebox::Matcher do
 
       it "finds an engine" do
         matcher.stubs(:ordered_engines).returns([TestEngine])
-        matcher.oneboxed.should_not be_nil
+        expect(matcher.oneboxed).not_to be_nil
       end
     end
 
@@ -26,7 +26,7 @@ describe Onebox::Matcher do
 
       it "doesn't find an engine" do
         matcher.stubs(:ordered_engines).returns([TestEngine])
-        matcher.oneboxed.should be_nil
+        expect(matcher.oneboxed).to be_nil
       end
     end
 
@@ -36,8 +36,19 @@ describe Onebox::Matcher do
 
       it "it finds an engine" do
         matcher.stubs(:ordered_engines).returns([TestEngine])
-        matcher.oneboxed.should_not be_nil
+        expect(matcher.oneboxed).not_to be_nil
       end
     end
+
+    describe "without a path but has a fragment string" do
+      let(:url) { "http://party.time.made.up-url.com/#article_id=1234" }
+      let(:matcher) { Onebox::Matcher.new(url) }
+
+      it "it finds an engine" do
+        matcher.stubs(:ordered_engines).returns([TestEngine])
+        expect(matcher.oneboxed).not_to be_nil
+      end
+    end
+
   end
 end
