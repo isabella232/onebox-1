@@ -17,11 +17,7 @@ describe Onebox::Preview do
 
   describe "#to_s" do
     it "returns some html if given a valid url" do
-<<<<<<< HEAD
-      title = "Knit Noro: Accessories: 30 Colorful Little Knits (Knit Noro Collection)"
-=======
       title = "Seven Languages in Seven Weeks: A Pragmatic Guide to Learning Programming Languages (Pragmatic Programmers)"
->>>>>>> v1.5.22
       expect(preview.to_s).to include(title)
     end
 

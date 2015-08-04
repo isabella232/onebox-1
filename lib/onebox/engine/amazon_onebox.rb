@@ -43,13 +43,14 @@ module Onebox
       end
 
       def price
-        @price ||= (raw.css("#priceblock_ourprice").text || raw.css(".priceLarge").inner_text || "").strip
+        @price ||= raw.css("#priceblock_ourprice").inner_text
       end
 
       def data
         result = { link: link,
                    title: raw.css("title").inner_text,
                    image: image,
+                   price: price,
                    price_cents: Monetize.parse(price).cents }
 
         result[:by_info] = raw.at("#by-line")
