@@ -8,23 +8,27 @@ module Onebox
 
       def title
         return og_raw.title if og_raw.title
-        raw.css('#bd > div.prodnameshare > h1').inner_html.gsub(/<[^>]+>|\n|\s{2,}/, '')
+        raw.css('.title_name').inner_html.gsub(/<[^>]+>|\n|\s{2,}/, '')
       end
 
       def price
-        amount = raw.xpath('/html/head/meta[@property="og:price:amount"]/@content')
-        return nil if amount.empty?
-        Monetize.parse(amount).cents.to_s
+        amount = raw.css('.dynamic_sku_price').text
+        amount.empty? ? nil : Onebox::Helpers.squish(amount)
+      end
+
+      def price_cents
+        Monetize.parse(price).cents.to_s
       end
 
       def image
         return og_raw.images.first if og_raw.images && og_raw.images.first
-        raw.css('img.product_main_img').first['src']
+        images = raw.css('[data-large-src]')
+        images.first && images.first.attributes['data-large-src'].value
       end
 
       def description
         return og_raw.description if og_raw.description
-        raw.xpath('/html/head/meta[@name="description"]/@content').first.value.gsub(/<[^>]+>/, '')
+        Onebox::Helpers.squish(raw.css('.no_json_description').inner_text)
       end
 
       def type
@@ -43,7 +47,8 @@ module Onebox
           image: image,
           description: description,
           type: type,
-          price_cents: price
+          price: price,
+          price_cents: price_cents
         }
       end
     end

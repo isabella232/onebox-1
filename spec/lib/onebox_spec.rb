@@ -29,7 +29,7 @@ describe Onebox do
   end
 
   describe "templates" do
-    let(:ignored)  { ["templates/_layout.mustache", "templates/githubgist.mustache"] }
+    let(:ignored)  { ["templates/_layout.mustache"] }
     let(:templates) { Dir["templates/*.mustache"] - ignored }
 
     def expect_templates_to_not_match(text)
@@ -48,11 +48,11 @@ describe Onebox do
       Onebox::Engine::WhitelistedGenericOnebox.whitelist = %w(youtube.com)
     end
     it "has no matcher for a made up url" do
-      expect(Onebox.has_matcher?("http://wow.com/omg/doge")).to be_false
+      expect(Onebox.has_matcher?("http://wow.com/omg/doge")).to be false
     end
 
     it "has a matcher for a real site" do
-      expect(Onebox.has_matcher?("http://www.youtube.com/watch?v=azaIE6QSMUs")).to be_true
+      expect(Onebox.has_matcher?("http://www.youtube.com/watch?v=azaIE6QSMUs")).to be true
     end
   end
 end

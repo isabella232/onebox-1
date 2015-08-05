@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html class='desktop no-js no-responsive wide-header' lang='en' prefix='og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#'>
+<head>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"78cc3d3411","applicationID":"3626718","transactionName":"Jw4IRhNeWAoAFEtJSgsFE1EVQhsVDQkT","queueTime":0,"applicationTime":662,"ttGuid":"","agentToken":null,"agent":"js-agent.newrelic.com/nr-632.min.js"}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UQ4DWVRVGwAGVldVBgk="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t){try{i.console&&console.log(t)}catch(e){}}var n,r=t("ee"),o=t(1),i={};try{n=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(i.console=!0,-1!==n.indexOf("dev")&&(i.dev=!0),-1!==n.indexOf("nr_dev")&&(i.nrDev=!0))}catch(a){}i.nrDev&&r.on("internal-error",function(t){e(t.stack)}),i.dev&&r.on("fn-err",function(t,n,r){e(r.stack)}),i.dev&&(e("NR AGENT IN DEVELOPMENT MODE"),e("flags: "+o(i,function(t){return t}).join(", ")))},{1:23,ee:"QJf3ax"}],4:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(6),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,t(5),window.onerror=e;try{throw new Error}catch(f){"stack"in f&&(t(1),t(2),"addEventListener"in window&&t(3),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)&&t(4),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:10,2:9,3:7,4:11,5:3,6:24,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t){t("loader").features.ins=!0},{loader:"G9z0Bl"}],6:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(1),i=t(2);t("loader").features.stn=!0,t(3),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),i.on("fn-start",function(){this.bstStart=Date.now()}),i.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),"requestAnimationFrame"])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:10,2:9,3:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],7:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:24,2:25,ee:"QJf3ax",gos:"7eSDFh"}],8:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:25,2:24,ee:"QJf3ax"}],9:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:25,2:24,ee:"QJf3ax"}],10:[function(t,e){function n(t,e,n){t[0]=o(t[0],"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:25,2:24,ee:"QJf3ax"}],11:[function(t,e){function n(){f.inPlace(this,p,"fn-")}function r(t,e){f.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}function i(t,e){for(var n in t)e[n]=t[n];return e}var a=t("ee").create(),s=t(1),c=t(2),f=c(a),u=c(s),d=window.XMLHttpRequest,p=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=a,window.XMLHttpRequest=function(t){var e=new d(t);try{a.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",o),e.addEventListener("readystatechange",n,!1)}catch(r){try{a.emit("internal-error",[r])}catch(i){}}return e},i(d,XMLHttpRequest),XMLHttpRequest.prototype=d.prototype,f.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),a.on("send-xhr-start",r),a.on("open-xhr-start",r)},{1:7,2:25,ee:"QJf3ax"}],12:[function(t){function e(t){var e=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!e.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=n(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(e.cat=d.split(", ").pop())}}else e.status=0;r.cbTime=this.cbTime,o("xhr",[e,r,this.startTime])}}}function n(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=e,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,e){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=n(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{a.emit("internal-error",[n])}catch(r){}}};for(var u=0;c>u;u++)e.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:13,3:11,4:7,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],13:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],14:[function(t,e){function n(t){return function(){r(t,[(new Date).getTime()].concat(i(arguments)))}}var r=t("handle"),o=t(1),i=t(2);"undefined"==typeof window.newrelic&&(newrelic=window.NREUM);var a=["setPageViewName","addPageAction","setCustomAttribute","finished","addToTrace","inlineHit","noticeError"];o(a,function(t,e){window.NREUM[e]=n("api-"+e)}),e.exports=window.NREUM},{1:23,2:24,handle:"D5DuLP"}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info,e=f.getElementsByTagName("script")[0];if(t&&t.licenseKey&&t.applicationID&&e){s(d,function(e,n){e in t||(t[e]=n)});var n="https"===u.split(":")[0]||t.sslForHttp;p.proto=n?"https://":"http://",a("mark",["onload",i()]);var r=f.createElement("script");r.src=p.proto+t.agent,e.parentNode.insertBefore(r,e)}}function r(){"complete"===f.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=t(1),c=(t(2),window),f=c.document,u=(""+location).split("?")[0],d={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-632.min.js"},p=e.exports={offset:i(),origin:u,features:{}};f.addEventListener?(f.addEventListener("DOMContentLoaded",o,!1),c.addEventListener("load",n,!1)):(f.attachEvent("onreadystatechange",r),c.attachEvent("onload",n)),a("mark",["firstbyte",i()])},{1:23,2:14,handle:"D5DuLP"}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],23:[function(t,e){function n(t,e){var n=[],o="",i=0;for(o in t)r.call(t,o)&&(n[i]=e(o,t[o]),i+=1);return n}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],24:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],25:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:24,ee:"QJf3ax"}]},{},["G9z0Bl",4,12,6,5]);</script>
+<meta charset='UTF-8'>
+<script>
+  //<![CDATA[
+    window.TMR = {
+      'data' : {
+        'startTime': (new Date()).getTime(),
+        'route': "products - show"
+      }
+    };
+  //]]>
+</script>
+
+
+<title>Flower Market Paper Towel Holder | Brand We Love | One Kings Lane</title>
+<link href="/assets/bundle/Product/base-80d36261f82662a36f6816e470f4b6ab.css" media="screen" rel="stylesheet" type="text/css" />
+
+<!--[if lt IE 9]>
+<link href="/assets/common/ie8-9aa0c268b0ef25566d20f6c41f35d318.css" media="all" rel="stylesheet" type="text/css" />
+<![endif]-->
+<!--[if lt IE 8]>
+<link href="/assets/common/ie7-ebb20da934a6f0b96d3173a630e1ca24.css" media="all" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<link href="/assets/Account/signup_login_modal-680468f5dbe5b2b3a8bd2097a0799ba7.css" media="screen" rel="stylesheet" type="text/css" />
+
+<script>window.OKL = {};OKL.vars={"logged_in":false,"guest":false,"uid":"null","controller":"products","action":"show","cookie_domain":".www.onekingslane.com","user_ip":"10.140.35.240","js_path":"https://www.onekingslane.com","tellApart_id":"MQvTZrFduqGP","production":true,"facebook_app_id":"118740844876852","customer_id":null,"test_bucket":null,"bloomreach":{"tracking_status":"on","secure_url":"https://cdns.brsrvr.com/v1/br-trk-5233.js","url":"http://cdn.brcdn.com/v1/br-trk-5233.js"},"microcart_v2":false,"shipping_threshold":null,"free_ship_same_day":false,"hattie_ship_threshold":null,"hattie_instant_pdp":true,"hattie_pow_instant_pdp":true,"hattie_edp_appearing_carousel":false,"hattie_narnia":false,"hattie_carousel_sort":false,"customer_segments":{},"shippingBanner":false,"jetlore_cart_update":null,"biscuit":{"action_name":"se_pdp"},"iosAppVersion":null,"search":{"header-class":"search-b-trigger","search_version":"ba"},"tellApartTrackingData":{"action_type":"pv","track_page_view":true,"should_track":true,"action_attrs":{"PageType":"Product","SKU":"4118435","ProductCategoryPath":"All Sales > Brand We Love > Colanders & Strainers"}},"pageExpiration":1439823600,"productDetail":{"productId":4118435,"imageCount":1,"imagePrefix":"https://okl-scene7.insnw.net/is/image/OKL/Product_MFE10104_Image_","optionCount":0,"salesEventId":59172,"past_sale":false,"trackerUrl":"null","skus":[{"id":2082372,"quantity":12,"reservable_quantity":75,"on_hold":false,"price":70.0,"retail":0.0}]},"should_display_carousel":false,"salesEvent":{"id":59172},"sku":0,"sku_id":2082372,"total_amount":"70.0","jl_cid":"7738c4197f158ae3ca29ae6308b54592ca068adbf9805f8c76458ed2988c5c27","jl_user_id":null,"jl_product_id":4118435,"tealiumData":{"should_track":true,"environment":"prod","recency_segment":"none","is_user":"0","is_shopper":"0","tier":"none","bucket":"87","device":null,"page_name":"Product 4118435","page_type":"Product","product_id":"4118435","product_name":"Flower Market Paper Towel Holder","product_brand":"MacKenzie-Childs","product_category":"511501","product_okl_price":"70.0","product_msrp_price":"0.0"},"br_data":{"acct_id":"5233","ptype":"product","prod_id":4118435,"prod_name":"Flower Market Paper Towel Holder","sku":2082372,"price":"70.0","sale_price":"70.0","pstatus":"available","cat":"Colanders & Strainers","cat_id":511501},"trackEvent":{"campaigns":["pdpAltImages","newPdpAltImages","oklShareButtonClick","emailShareButtonClick","emailShareFormSubmit","skuView","appOpen","buyNow","boomr","addFavorite","removeFavorite","searchRevealSearchBox","searchSubmit","deptMenu","deptDeadLink"],"action_name":"se_pdp","params":{"sales_event_id":59172,"product_id":4118435,"search_uuid":null}},"newPDP":true};</script>
+<script class='micro-cart-template' type='text/x-handlebars-template'>
+<a href='/cart' id='cart-tab'>
+<div class='cart'>
+<span class='cart-line-counter'></span>
+</div>
+</a>
+<div class='reservation-timer-container'></div>
+<ul class='cart-lines'></ul>
+<a class='checkout-btn' href='/checkout'>
+Checkout Now
+</a>
+</script>
+<script class='micro-cart-line-template' type='text/x-handlebars-template'>
+<img src='{{image_url}}'>
+<h5>
+{{name}}
+</h5>
+<div class='quantity'>
+qty:
+<span>
+{{quantity}}
+</span>
+</div>
+<div class='price'>
+{{total_price}}
+</div>
+<div class='urgency_notice'>
+{{urgency_notice}}
+</div>
+</script>
+
+<script>
+var _gaq = _gaq || [];
+</script>
+<script src="/assets/head_js-6b39a5e2b20c0689f418c3b26a8154c2.js" type="text/javascript"></script>
+<script src='//fonts.onekingslane.com/qdv1kdm.js'></script>
+<script>
+try{Typekit.load();}catch(e){}
+</script>
+
+<script>
+window.optimizely = window.optimizely || [];
+window.optimizely.push(["integrationPrefix", ""]);
+</script>
+<script id='okl-optimizely' src='https://cdn.optimizely.com/js/7259088.js' type='text/javascript'></script>
+
+
+<meta content='hkAAyB3zpbOuoyLPbmhtCMASm0N6y2NwDwQrSUZmfK4' name='google-site-verification'>
+<meta content='F47438BCB02BCD87E8B4B72079525B30' name='msvalidate.01'>
+<meta content='118740844876852' property='fb:app_id'>
+<meta content='100003023284794' property='fb:admins'>
+
+<script src="/assets/bundle/signup-7ed437c4a7be1e82b242d02d09067951.js" type="text/javascript"></script>
+<meta content='width=1200' name='viewport'>
+<meta content="index, follow" name="robots" />
+<meta content="product" property="og:type" />
+<meta content="One Kings Lane" property="og:site_name" />
+<meta content="photo" name="twitter:card" />
+<meta content="@onekingslane" name="twitter:site" />
+<meta content="Featuring a stainless steel center post, glass finial, and an enamel base with hand-woven bamboo, this elegant paper towel holder has a hand-applied fanciful..." name="Description" />
+<meta content="Colanders &amp; Strainers" name="Keywords" />
+<link href="https://www.onekingslane.com/product/59172/4118435" rel="canonical" />
+<meta content="Flower Market Paper Towel Holder" property="og:title" />
+<meta content="https://www.onekingslane.com/product/59172/4118435?utm_source=facebook&amp;utm_medium=PDPviralshare&amp;utm_campaign=PDPlike" property="og:url" />
+<meta content="70.0" property="og:price:amount" />
+<meta content="USD" property="og:price:currency" />
+<meta content="https://okl-scene7.insnw.net/is/image/OKL/Product_MFE10104_Image_1?wid=1200&hei=627" property="og:image" />
+<meta content="Featuring a stainless steel center post, glass finial, and an enamel base with hand-woven bamboo, this elegant paper towel holder has a hand-applied fanciful botanical motif that recalls a lush..." property="og:description" />
+<meta content="https://www.onekingslane.com/product/59172/4118435?f=twitter&amp;utm_source=twitter&amp;utm_medium=social&amp;utm_campaign=photo" name="twitter:url" />
+<meta content="Flower Market Paper Towel Holder" name="twitter:title" />
+<meta content="https://okl-scene7.insnw.net/is/image/OKL/Product_MFE10104_Image_1?$medium$" name="twitter:image" />
+<meta content="298" name="twitter:image:width" />
+<meta content="203" name="twitter:image:height" />
+
+
+<link href='/favicon.ico' rel='shortcut icon'>
+</head>
+<body class='story-event product_detail_page' id='page-top'>
+<header class='b2 okl-header rails search-b-trigger'>
+<aside class='hidden' data-dismiss-cookie-expiry='3' data-dismiss-cookie='returns_banner_dismissals' data-dismiss-max='1' data-name='returns' id='shipping-banner'>
+<div class='x dismiss'></div>
+<span class='msg'>
+Too big? Don’t love the color? We’re now accepting returns on all merchandise!
+</span>
+<span class='return-policy-text'>
+<a href='http://help.onekingslane.com/customer/portal/articles/72357-return-policy'>Return Policy</a>
+</span>
+</aside>
+
+<section>
+<h1>
+<a href="/" data-linkname="header_logo">One Kings Lane</a>
+</h1>
+<ul class='offer-account-cart'>
+<li class='welcome-guest'>
+Welcome (
+<a href="/login">Log In</a>
+or
+<a href="/join">Sign Up</a>
+)
+</li>
+<li class='favorites hidden'>
+<a href='/favorites'>
+<div class='icon'></div><div class='count'></div></a>
+</li>
+<li class='cart'>
+<a class='cart-icon' href='/cart'>
+Shopping Cart
+<span class='cart-line-counter hidden'>
+0
+</span>
+</a>
+
+<div class='micro-cart-container'></div>
+
+</li>
+</ul>
+<div class='sales-menu'>
+<div class='wrapper'>
+<ul class='latest-sales'></ul>
+<a href="/" class="see-all">See All of Our Events</a>
+</div>
+</div>
+
+<nav class='style-upcoming'>
+<ul>
+<li>
+<a href="/live-love-home" data-linkname="header_llh">Style Blog</a>
+</li>
+<li>
+<a href="/calendar" data-linkname="header_calendar">Upcoming Events</a>
+</li>
+<li>
+<a href="/invite" class="invite-friends">Invite Friends</a>
+</li>
+</ul>
+</nav>
+<section class='search-container'>
+<form action='/search' class='search-form' method='get'>
+<fieldset>
+<label for='q'>Search by item or category</label>
+<input class='search-field' name='q' type='text' value=''>
+<div class='press-enter search-a'>Press Enter</div>
+<button class='search-icon search-b'></button>
+</fieldset>
+</form>
+</section>
+
+</section>
+<div class='full-width'>
+<nav class='shop-by'>
+<h2>Shop by</h2>
+<ul>
+<li>
+<a href="/" data-linkname="header_allsales_link" id="all-sales">Today&#39;s Events</a>
+</li>
+<li>
+<nav class='dept-menu'><ul><li><a href="/furniture/seating" data-id="2" data-linkname="header_menu_cat"><h4>Seating</h4></a><ul><li><a href="/furniture/seating/sofas-loveseats" data-id="2" data-linkname="header_menu_subcat">Sofas &amp; Loveseats</a></li><li><a href="/furniture/seating/chaises-lounges" data-id="2" data-linkname="header_menu_subcat">Chaises &amp; Lounges</a></li><li><a href="/furniture/seating/dining-chairs" data-id="2" data-linkname="header_menu_subcat">Dining Chairs</a></li><li><a href="/furniture/seating/accent-chairs" data-id="2" data-linkname="header_menu_subcat">Accent Chairs</a></li><li><a href="/furniture/seating/poufs-ottomans" data-id="2" data-linkname="header_menu_subcat">Poufs &amp; Ottomans</a></li><li><a href="/furniture/seating/benches" data-id="2" data-linkname="header_menu_subcat">Benches</a></li><li><a href="/furniture/seating/stools" data-id="2" data-linkname="header_menu_subcat">Stools</a></li></ul></li><li><a href="/furniture/tables" data-id="10" data-linkname="header_menu_cat"><h4>Tables</h4></a><ul><li><a href="/furniture/tables/dining-tables" data-id="10" data-linkname="header_menu_subcat">Dining Tables</a></li><li><a href="/furniture/tables/side-tables" data-id="10" data-linkname="header_menu_subcat">Side Tables</a></li><li><a href="/furniture/tables/coffee-cocktail-tables" data-id="10" data-linkname="header_menu_subcat">Coffee &amp; Cocktail Tables</a></li><li><a href="/furniture/tables/console-tables" data-id="10" data-linkname="header_menu_subcat">Console Tables</a></li><li><a href="/furniture/tables/desks" data-id="10" data-linkname="header_menu_subcat">Desks</a></li></ul></li><li><a href="/furniture/cabinets-shelving" data-id="15" data-linkname="header_menu_cat"><h4>Cabinets & Shelving</h4></a><ul><li><a href="/furniture/cabinets-shelving/armoires-cabinets" data-id="15" data-linkname="header_menu_subcat">Armoires &amp; Cabinets</a></li><li><a href="/furniture/cabinets-shelving/sideboards-media-storage" data-id="15" data-linkname="header_menu_subcat">Sideboards &amp; Media Storage</a></li><li><a href="/furniture/cabinets-shelving/shelves-bookcases" data-id="15" data-linkname="header_menu_subcat">Shelves &amp; Bookcases</a></li></ul></li><li><a href="/furniture/bedroom" data-id="19" data-linkname="header_menu_cat"><h4>Bedroom</h4></a><ul><li><a href="/furniture/bedroom/beds-headboards" data-id="19" data-linkname="header_menu_subcat">Beds &amp; Headboards</a></li><li><a href="/furniture/bedroom/nightstands-side-tables" data-id="19" data-linkname="header_menu_subcat">Nightstands &amp; Side Tables</a></li><li><a href="/furniture/bedroom/dressers" data-id="19" data-linkname="header_menu_subcat">Dressers</a></li><li><a href="/furniture/bedroom/armoires" data-id="19" data-linkname="header_menu_subcat">Armoires</a></li></ul></li><li><a href="/furniture/outdoor-furniture" data-id="88" data-linkname="header_menu_cat"><h4>Outdoor Furniture</h4></a><ul><li><a href="/furniture/outdoor-furniture/outdoor-lounge" data-id="88" data-linkname="header_menu_subcat">Outdoor Lounge</a></li><li><a href="/furniture/outdoor-furniture/outdoor-dining" data-id="88" data-linkname="header_menu_subcat">Outdoor Dining</a></li></ul></li></ul></nav>
+<h3>Furniture</h3>
+</li>
+<li>
+<nav class='dept-menu'><ul><li><a href="/bed-bath/bedding" data-id="25" data-linkname="header_menu_cat"><h4>Bedding</h4></a><ul><li><a href="/bed-bath/bedding/duvet-covers-shams" data-id="25" data-linkname="header_menu_subcat">Duvet Covers &amp; Shams</a></li><li><a href="/bed-bath/bedding/sheets-pillow-cases" data-id="25" data-linkname="header_menu_subcat">Sheets &amp; Pillow Cases</a></li><li><a href="/bed-bath/bedding/blankets-quilts" data-id="25" data-linkname="header_menu_subcat">Blankets &amp; Quilts</a></li><li><a href="/bed-bath/bedding/decorative-pillows" data-id="25" data-linkname="header_menu_subcat">Decorative Pillows</a></li><li><a href="/bed-bath/bedding/throws" data-id="25" data-linkname="header_menu_subcat">Throws</a></li><li><a href="/bed-bath/bedding/bedding-basics" data-id="25" data-linkname="header_menu_subcat">Bedding Basics</a></li></ul></li><li><a href="/bed-bath/bath" data-id="32" data-linkname="header_menu_cat"><h4>Bath</h4></a><ul><li><a href="/bed-bath/bath/towels-robes" data-id="32" data-linkname="header_menu_subcat">Towels &amp; Robes</a></li><li><a href="/bed-bath/bath/shower-curtains-bath-mats" data-id="32" data-linkname="header_menu_subcat">Shower Curtains &amp; Bath Mats</a></li><li><a href="/bed-bath/bath/bath-accessories" data-id="32" data-linkname="header_menu_subcat">Bath Accessories</a></li><li><a href="/bed-bath/bath/beach-towels" data-id="32" data-linkname="header_menu_subcat">Beach Towels</a></li></ul></li></ul></nav>
+<h3>Bed &amp; Bath</h3>
+</li>
+<li>
+<nav class='dept-menu'><ul><li><a href="/lighting/table-lamps" data-id="36" data-linkname="header_menu_cat">Table Lamps</a></li><li><a href="/lighting/floor-lamps" data-id="37" data-linkname="header_menu_cat">Floor Lamps</a></li><li><a href="/lighting/chandeliers" data-id="38" data-linkname="header_menu_cat">Chandeliers</a></li><li><a href="/lighting/pendants" data-id="39" data-linkname="header_menu_cat">Pendants</a></li><li><a href="/lighting/wall-ceiling-lighting" data-id="40" data-linkname="header_menu_cat">Wall & Ceiling Lighting</a></li></ul></nav>
+<h3>Lighting</h3>
+</li>
+<li>
+<nav class='dept-menu'><ul><li><a href="/kitchen-tabletop/tabletop" data-id="42" data-linkname="header_menu_cat"><h4>Tabletop</h4></a><ul><li><a href="/kitchen-tabletop/tabletop/plates" data-id="42" data-linkname="header_menu_subcat">Plates</a></li><li><a href="/kitchen-tabletop/tabletop/bowls" data-id="42" data-linkname="header_menu_subcat">Bowls</a></li><li><a href="/kitchen-tabletop/tabletop/mugs" data-id="42" data-linkname="header_menu_subcat">Mugs</a></li><li><a href="/kitchen-tabletop/tabletop/flatware" data-id="42" data-linkname="header_menu_subcat">Flatware</a></li><li><a href="/kitchen-tabletop/tabletop/stemware" data-id="42" data-linkname="header_menu_subcat">Stemware</a></li><li><a href="/kitchen-tabletop/tabletop/glassware" data-id="42" data-linkname="header_menu_subcat">Glassware</a></li><li><a href="/kitchen-tabletop/tabletop/wine-bar-accessories" data-id="42" data-linkname="header_menu_subcat">Wine &amp; Bar Accessories</a></li></ul></li><li><a href="/kitchen-tabletop/serveware" data-id="49" data-linkname="header_menu_cat"><h4>Serveware</h4></a><ul><li><a href="/kitchen-tabletop/serveware/serving-bowls" data-id="49" data-linkname="header_menu_subcat">Serving Bowls</a></li><li><a href="/kitchen-tabletop/serveware/platters-stands" data-id="49" data-linkname="header_menu_subcat">Platters &amp; Stands</a></li><li><a href="/kitchen-tabletop/serveware/serving-utensils" data-id="49" data-linkname="header_menu_subcat">Serving Utensils</a></li><li><a href="/kitchen-tabletop/serveware/pitchers-jugs" data-id="49" data-linkname="header_menu_subcat">Pitchers &amp; Jugs</a></li><li><a href="/kitchen-tabletop/serveware/cheese-boards-knives" data-id="49" data-linkname="header_menu_subcat">Cheese Boards &amp; Knives</a></li><li><a href="/kitchen-tabletop/serveware/salt-pepper" data-id="49" data-linkname="header_menu_subcat">Salt &amp; Pepper</a></li><li><a href="/kitchen-tabletop/serveware/coffee-tea" data-id="49" data-linkname="header_menu_subcat">Coffee &amp; Tea</a></li></ul></li><li><a href="/kitchen-tabletop/cookware-tools" data-id="54" data-linkname="header_menu_cat"><h4>Cookware & Tools</h4></a><ul><li><a href="/kitchen-tabletop/cookware-tools/pots-pans" data-id="54" data-linkname="header_menu_subcat">Pots &amp; Pans</a></li><li><a href="/kitchen-tabletop/cookware-tools/cooking-tools" data-id="54" data-linkname="header_menu_subcat">Cooking Tools</a></li><li><a href="/kitchen-tabletop/cookware-tools/canisters-jars" data-id="54" data-linkname="header_menu_subcat">Canisters &amp; Jars</a></li><li><a href="/kitchen-tabletop/cookware-tools/dish-towels-aprons-mitts" data-id="54" data-linkname="header_menu_subcat">Dish Towels, Aprons &amp; Mitts</a></li><li><a href="/kitchen-tabletop/cookware-tools/bakeware" data-id="54" data-linkname="header_menu_subcat">Bakeware</a></li></ul></li><li><a href="/kitchen-tabletop/table-linens" data-id="60" data-linkname="header_menu_cat"><h4>Table Linens</h4></a><ul><li><a href="/kitchen-tabletop/table-linens/napkins-napkin-rings" data-id="60" data-linkname="header_menu_subcat">Napkins &amp; Napkin Rings</a></li><li><a href="/kitchen-tabletop/table-linens/place-mats" data-id="60" data-linkname="header_menu_subcat">Place Mats</a></li><li><a href="/kitchen-tabletop/table-linens/tablecloths-runners" data-id="60" data-linkname="header_menu_subcat">Tablecloths &amp; Runners</a></li></ul></li></ul></nav>
+<h3>Kitchen &amp; Tabletop</h3>
+</li>
+<li>
+<nav class='dept-menu'><ul><li><a href="/rugs/geometric-contemporary" data-id="65" data-linkname="header_menu_cat">Geometric & Contemporary</a></li><li><a href="/rugs/traditional-limited-edition" data-id="66" data-linkname="header_menu_cat">Traditional & Limited Edition</a></li><li><a href="/rugs/natural-fiber" data-id="67" data-linkname="header_menu_cat">Natural Fiber</a></li><li><a href="/rugs/globally-inspired" data-id="68" data-linkname="header_menu_cat">Globally Inspired</a></li><li><a href="/rugs/rug-pads" data-id="69" data-linkname="header_menu_cat">Rug Pads</a></li><li><a href="/rugs/outdoor" data-id="101" data-linkname="header_menu_cat">Outdoor</a></li><li><a href="/rugs/doormats" data-id="102" data-linkname="header_menu_cat">Doormats</a></li></ul></nav>
+<h3>Rugs</h3>
+</li>
+<li>
+<nav class='dept-menu'><ul><li><a href="/art-mirrors/mirrors" data-id="71" data-linkname="header_menu_cat">Mirrors</a></li><li><a href="/art-mirrors/art" data-id="72" data-linkname="header_menu_cat">Art</a></li><li><a href="/art-mirrors/wall-decor" data-id="73" data-linkname="header_menu_cat">Wall Decor</a></li></ul></nav>
+<h3>Art &amp; Mirrors</h3>
+</li>
+<li>
+<nav class='dept-menu'><ul><li><a href="/decorative-accents/indoor-accents" data-id="75" data-linkname="header_menu_cat"><h4>Indoor Accents</h4></a><ul><li><a href="/decorative-accents/indoor-accents/pillows" data-id="75" data-linkname="header_menu_subcat">Pillows</a></li><li><a href="/decorative-accents/indoor-accents/throws" data-id="75" data-linkname="header_menu_subcat">Throws</a></li><li><a href="/decorative-accents/indoor-accents/candles-candleholders" data-id="75" data-linkname="header_menu_subcat">Candles &amp; Candleholders</a></li><li><a href="/decorative-accents/indoor-accents/picture-frames" data-id="75" data-linkname="header_menu_subcat">Picture Frames</a></li><li><a href="/decorative-accents/indoor-accents/books" data-id="75" data-linkname="header_menu_subcat">Books</a></li><li><a href="/decorative-accents/indoor-accents/trays-boxes" data-id="75" data-linkname="header_menu_subcat">Trays &amp; Boxes</a></li><li><a href="/decorative-accents/indoor-accents/accents" data-id="75" data-linkname="header_menu_subcat">Accents</a></li><li><a href="/decorative-accents/indoor-accents/objets" data-id="75" data-linkname="header_menu_subcat">Objets</a></li><li><a href="/decorative-accents/indoor-accents/floral" data-id="75" data-linkname="header_menu_subcat">Floral</a></li></ul></li><li><a href="/decorative-accents/outdoor-accents" data-id="85" data-linkname="header_menu_cat"><h4>Outdoor Accents</h4></a><ul><li><a href="/decorative-accents/outdoor-accents/lanterns-planters" data-id="85" data-linkname="header_menu_subcat">Lanterns &amp; Planters</a></li><li><a href="/decorative-accents/outdoor-accents/outdoor-accessories" data-id="85" data-linkname="header_menu_subcat">Outdoor Accessories</a></li><li><a href="/decorative-accents/outdoor-accents/outdoor-pillows" data-id="85" data-linkname="header_menu_subcat">Outdoor Pillows</a></li><li><a href="/decorative-accents/outdoor-accents/doormats" data-id="85" data-linkname="header_menu_subcat">Doormats</a></li></ul></li></ul></nav>
+<h3>Decorative Accents</h3>
+</li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=all-things" class="vmf-dept-link" data-linkname="category_vintage">Vintage</a>
+<nav class='vintage-menu'>
+<div class='wrapper'>
+<ul>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=all-things"><img src='https://okl1-scene7.insnw.net/is/image/OKL/todaysarrivals-01?wid=138&amp;op_sharpen=1'>
+<h4>All Things Vintage</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=floor-coverings"><img src='https://okl1-scene7.insnw.net/is/image/OKL/floor-coverings-01?wid=138&amp;op_sharpen=1'>
+<h4>Floor Coverings</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=decorative-accessories"><img src='https://okl1-scene7.insnw.net/is/image/OKL/decorative-accessories-01?wid=138&amp;op_sharpen=1'>
+<h4>Decorative Accessories</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=furniture"><img src='https://okl-scene7.insnw.net/is/image/OKL/furniture-01?wid=138&amp;op_sharpen=1'>
+<h4>Furniture</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=art"><img src='https://okl1-scene7.insnw.net/is/image/OKL/art-01?wid=138&amp;op_sharpen=1'>
+<h4>Art</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=lighting"><img src='https://okl-scene7.insnw.net/is/image/OKL/lighting-01?wid=138&amp;op_sharpen=1'>
+<h4>Lighting</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=wall-decor"><img src='https://okl1-scene7.insnw.net/is/image/OKL/wall-decor-01?wid=138&amp;op_sharpen=1'>
+<h4>Wall Decor</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=tabletop"><img src='https://okl1-scene7.insnw.net/is/image/OKL/tabletop-01?wid=138&amp;op_sharpen=1'>
+<h4>Tabletop</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=textiles"><img src='https://okl1-scene7.insnw.net/is/image/OKL/textiles-01?wid=138&amp;op_sharpen=1'>
+<h4>Textiles</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=books"><img src='https://okl-scene7.insnw.net/is/image/OKL/books-01?wid=138&amp;op_sharpen=1'>
+<h4>Books</h4>
+</a></li>
+<li>
+<a href="/search?new_s=true&amp;vmf_page=jewelry"><img src='https://okl1-scene7.insnw.net/is/image/OKL/jewelry-01?wid=138&amp;op_sharpen=1'>
+<h4>Jewelry &amp; Accessories</h4>
+</a></li>
+</ul>
+</div>
+</nav>
+
+</li>
+</ul>
+</nav>
+
+</div>
+
+</header>
+<div class='bg search-a'></div>
+
+<div id='wrapper'>
+<div class='sl-container'>
+<section class='sl-modal' id='slModal'>
+<button class='sl-close' type='button'>Register Later</button>
+<div class='sl-panel sl-panel-welcome sl-active' id='sl-panel-welcome'>
+<div class='sl-content'>
+<div class='sl-intro'>
+<h2 class='sl-intro-title sl-intro-title--welcome'>Welcome</h2>
+<h3 class='sl-intro-subhead'>
+Unique furniture, decor, and more<br>up to 70% off
+</h3>
+</div>
+
+<form action='/customers/sign-up-step-one.json' class='sl-form' method='post' novalidate='novalidate'>
+<div class='sl-input'>
+<label class='sl-label' for='sl-welcome-email'>Email address</label>
+<input autocomplete='off' class='sl-input-control' id='sl-welcome-email' name='email' placeholder='Email address' type='email'>
+</div>
+<div class='sl-input'>
+<button class='sl-btn' type='submit'>Continue</button>
+<p class='sl-help'>
+<a class='sl-fb' href='https://www.facebook.com/v2.2/dialog/oauth?client_id=118740844876852&amp;redirect_uri=https%3A%2F%2Fwww.onekingslane.com%2Flogin-facebook%2Ffacebook-connect-response&amp;scope=public_profile%2Cemail&amp;state=d89889d7525d2fe85317d2ef2e441053'>Login with Facebook</a>
+</p>
+</div>
+<p class='sl-terms'>
+By clicking &ldquo;Continue&rdquo;, you agree to our
+<a href="/terms-of-use" target="_blank">Terms of Use</a>
+and
+<a href="/privacy" target="_blank">Privacy Policy</a>.
+</p>
+</form>
+</div>
+</div>
+<div class='sl-panel sl-panel-welcome sl-panel-welcome--favorites' id='sl-panel-favorites'>
+<div class='sl-content'>
+<div class='sl-intro'>
+<h2 class='sl-intro-title sl-intro-title--favorites'>Save what you love.</h2>
+<h3 class='sl-intro-subhead sl-intro-subhead--favorites'>
+Sign up to save your favorite products and<br>access them anytime, anyplace.
+</h3>
+</div>
+
+<form action='/customers/sign-up-step-one.json' class='sl-form' method='post' novalidate='novalidate'>
+<div class='sl-input'>
+<label class='sl-label' for='sl-fav-email'>Email address</label>
+<input autocomplete='off' class='sl-input-control' id='sl-fav-email' name='email' placeholder='Email address' type='email'>
+</div>
+<div class='sl-input'>
+<button class='sl-btn' type='submit'>Continue</button>
+<p class='sl-help'>
+<a class='sl-fb' href='https://www.facebook.com/v2.2/dialog/oauth?client_id=118740844876852&amp;redirect_uri=https%3A%2F%2Fwww.onekingslane.com%2Flogin-facebook%2Ffacebook-connect-response&amp;scope=public_profile%2Cemail&amp;state=59c88aab701a325a079ce828bd2170c9'>Login with Facebook</a>
+</p>
+</div>
+<p class='sl-terms'>
+By clicking &ldquo;Continue&rdquo;, you agree to our
+<a href="/terms-of-use" target="_blank">Terms of Use</a>
+and
+<a href="/privacy" target="_blank">Privacy Policy</a>.
+</p>
+</form>
+</div>
+</div>
+<div class='sl-panel sl-panel-join' id='sl-panel-join'>
+<a class='sl-back' href='#'>Back</a>
+<div class='sl-content'>
+<div class='sl-intro'>
+<h2 class='sl-intro-title'>One more detail</h2>
+<h3 class='sl-intro-subhead'>And you can start shopping!</h3>
+</div>
+
+<form action='/customers/sign-up-step-two.json' class='sl-form' method='post' novalidate='novalidate'>
+<input name='email' type='hidden'>
+<input name='confirmEmail' type='hidden'>
+<input name='acceptTerms' type='hidden'>
+<input name='source' type='hidden'>
+<input name='firstName' type='hidden'>
+<input name='lastName' type='hidden'>
+<input name='return_url' type='hidden'>
+<div class='sl-input'>
+<label class='sl-label' for='sl-join-password'>Create Password (6-16 characters)</label>
+<input autocomplete='off' class='sl-input-control' id='sl-join-password' name='password' placeholder='Create Password (6-16 characters)' type='password' value=''>
+</div>
+<div class='sl-input'>
+<button class='sl-btn' type='submit'>Shop Now</button>
+</div>
+</form>
+</div>
+</div>
+<div class='sl-panel sl-panel-login' id='sl-panel-login'>
+<a class='sl-back' href='#'>Back</a>
+<div class='sl-content'>
+<div class='sl-intro'>
+<h2 class='sl-intro-title'>Welcome back!</h2>
+<h3 class='sl-intro-subhead'>Enter your password to start shopping!</h3>
+</div>
+
+<form action='/customers/sign-in.json' class='sl-form' method='post' novalidate='novalidate'>
+<input name='email' type='hidden'>
+<div class='sl-input'>
+<label class='sl-label' for='sl-login-password'>Password</label>
+<input class='sl-input-control' id='sl-login-password' name='password' placeholder='Password' type='password' value=''>
+</div>
+<div class='sl-input'>
+<button class='sl-btn' type='submit'>Shop Now</button>
+</div>
+<p class='sl-input-help'>
+<a class='sl-nav' href='#sl-panel-reset'>Forgot Password?</a>
+</p>
+<div class='sl-input sl-checkbox sl-remember'>
+<label class='sl-label checkbox'>
+<input checked='checked' name='keepLogIn' type='checkbox' value='1'>
+Keep me logged in
+</label>
+</div>
+</form>
+</div>
+</div>
+<div class='sl-panel sl-panel-reset-1' id='sl-panel-reset'>
+<a class='sl-back' href='#'>Back</a>
+<div class='sl-content'>
+<div class='sl-intro'>
+<h2 class='sl-intro-title'>Forgot Your Password?</h2>
+</div>
+
+<form action='/customers/initiate-reset-password' class='sl-form' method='post'>
+<p>Please enter your email address below and we will send you an email to confirm your password.</p>
+<div class='sl-input'>
+<label class='sl-label' form='sl-reset-email'>Email address</label>
+<input class='sl-input-control' id='sl-reset-email' name='email' placeholder='Email address' type='email'>
+</div>
+<div class='sl-input'>
+<button class='sl-btn' type='submit'>Submit</button>
+</div>
+</form>
+</div>
+</div>
+<div class='sl-panel sl-panel-reset-2' id='sl-panel-reset-success'>
+<div class='sl-content'>
+<div class='sl-intro'>
+<h2 class='sl-intro-title'>Forgot Your Password?</h2>
+</div>
+<p>Thank you. If a matching email exists we will send you an email in a few minutes with instructions on how to reset your password.</p>
+<p>
+Don't forget to check your spam folder if you cannot find the email. For further assistance please contact us at
+<a href='mailto:customercare@onekingslane.com'>customercare@onekingslane.com</a>
+.
+</p>
+<a class='sl-nav sl-btn' href='#sl-panel-welcome'>Okay</a>
+</div>
+</div>
+</section>
+<div class='sl-overlay'></div>
+</div>
+
+<div id='okl-content'>
+<!-- TODO: rename these partials to not use 'new' when the new pdp rolls out 100%, and delete the old partials -->
+<div class='image-zoom-modal zoom-status-1'>
+<div class='overlay'></div>
+<div class='box'>
+<div class='close-icon'></div>
+<div class='main-section'>
+<div class='viewport'>
+<img src=''>
+</div>
+</div>
+<div class='bottom-section'>
+<div class='instructions'>
+Click anywhere on the image to zoom. Click and drag the image to pan.
+</div>
+<div class='tools'>
+<div class='gallery' data-num-images='1'>
+<div class='arrow left'></div>
+<div class='iz-thumbnails'>
+<div class='iz-thumbnails-content'>
+<div class='active iz-thumbnail-box' data-index='0'>
+<img class='iz-thumbnail' src='https://okl-scene7.insnw.net/is/image/OKL/Product_MFE10104_Image_1?wid=60&amp;hei=41'>
+<div class='underline'></div>
+</div>
+</div>
+</div>
+<div class='arrow right clickable'></div>
+</div>
+<div class='controls'><div class='label'>Zoom</div><div class='button zoom-in'></div><div class='button zoom-out'></div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='pdp-page-heading pdp-section'>
+<div class='pdp-section-inner clearfix'>
+<div class='event-ending'>
+</div>
+<!-- Not including breadcrumbs in MVP -->
+<!--
+<div class='pdp-breadcrumbs'>
+Flower Market Paper Towel Holder
+</div>
+-->
+</div>
+</div>
+
+<div class='pdp-overview-and-images pdp-section'>
+<div class='pdp-section-inner clearfix'>
+<div class='pdp-prd-overview'>
+<div class='fave-wrapper'>
+<h1 class='product-name'>Flower Market Paper Towel Holder</h1>
+<button class='favorite' data-product-id='4118435'>Favorite</button>
+</div>
+<p class='brand'>MacKenzie-Childs</p>
+<form action='/cart/add_cart_line' id='productForm' method='post' name='add_cart_line'>
+<input id='cartId' type='hidden' value=''>
+<input name='salesEventId' type='hidden' value='59172'>
+<input name='productId' type='hidden' value='4118435'>
+<input name='virtualEventCode' type='hidden' value=''>
+<input data-product='0' id='isVmf' name='isVmf' type='hidden' value='0'>
+<div class='price'>
+<div class='not-clearance'>
+<p class='ours'>
+$70.00
+</p>
+</div>
+</div>
+<div class='sku-options'>
+<div class='availability'>
+<input id='selectSkuId' name='skuId' type='hidden' value='2082372'>
+<div class='qty'>
+<label for='selectSkuQuantity'>Qty</label>
+<div class='fancy-select'>
+<select class='qty-select' id='selectSkuQuantity' name='quantity'>
+<option selected='selected' value='1'>1</option>
+<option value='2'>
+2
+</option>
+<option value='3'>
+3
+</option>
+<option value='4'>
+4
+</option>
+<option value='5'>
+5
+</option>
+<option value='6'>
+6
+</option>
+<option value='7'>
+7
+</option>
+<option value='8'>
+8
+</option>
+<option value='9'>
+9
+</option>
+<option value='10'>
+10
+</option>
+<option value='11'>
+11
+</option>
+<option value='12'>
+12
+</option>
+</select>
+<span class='caret'></span>
+</div>
+</div>
+<div class='cta'>
+<button class='add-to-cart' type='submit'>Add To Cart</button>
+</div>
+<p class='add-to-cart-errors'></p>
+</div>
+</div>
+
+</form>
+<div class='pdp-viral-share'>
+<div class='facebook-icon'>
+<a class='viral-icon facebook-icon-link okl-share' data-okl-share-item='new_pdp' data-okl-share-track='true' data-okl-share-type='facebook' href='http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.onekingslane.com%2Fproduct%2F59172%2F4118435'></a>
+</div>
+<a class='viral-icon pinterest okl-share' data-okl-share-item='new_pdp' data-okl-share-track='true' data-okl-share-type='pinterest' href='http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.onekingslane.com%2Fproduct%2F59172%2F4118435&amp;media=https%3A%2F%2Fokl-scene7.insnw.net%2Fis%2Fimage%2FOKL%2FProduct_MFE10104_Image_1%3Fwid=640%26hei=436&amp;description=Flower+Market+Paper+Towel+Holder'></a>
+</div>
+
+</div>
+
+<div class='clearfix num-images-1 pdp-product-images' data-num-images='1'>
+<div class='main-image-section'>
+
+<img alt='Flower Market Paper Towel Holder' data-index='0' id='main-image' src='https://okl-scene7.insnw.net/is/image/OKL/Product_MFE10104_Image_1?wid=732&amp;hei=499'>
+</div>
+</div>
+
+</div>
+</div>
+<div class='pdp-section-divider'></div>
+<div class='pdp-product-details pdp-section'>
+<div class='pdp-section-inner clearfix'>
+<div class='panel shipping-info'>
+<h3 class='heading'>
+Shipping & Returns
+</h3>
+<div class='content'>
+<dl class='shippingDetails'>
+<dt class='ait estimated-arrival'>
+Estimated Arrival<div class='ait-gift'>
+<div class='icon'></div>
+<div class='tooltip'>Arrives by 12/23</div>
+</div></dt>
+<dd class='ait estimated-arrival'>
+Aug 25 - Aug 28
+</dd>
+<dt>Returns:</dt>
+<dd>
+Returns accepted within
+14
+days of delivery.
+</dd>
+</dl>
+
+</div>
+</div>
+<div class='panel product-info yruler-false'>
+<h3 class='heading'>Product Information</h3>
+<div class='content'>
+<div class='first-col'>
+<dl>
+<dt>Made of:</dt>
+<dd>bamboo rattan/stainless steel; <br> finial, glass</dd>
+<dt>Size:</dt>
+<dd>8"Dia x 14"H</dd>
+
+</dl>
+</div>
+<div class='second-col'>
+<dl>
+<dt>Color:</dt>
+<dd>white</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class='panel product-description'>
+<h3 class='heading'>Why We Love This</h3>
+<div class='content'>
+<div class='actual-description'>
+<p>Featuring a stainless steel center post, glass finial, and an enamel base with hand-woven bamboo, this elegant paper towel holder has a hand-applied fanciful botanical motif that recalls a lush English garden in the peak of summer.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='pdp-brand-seller-details pdp-section'>
+<div class='pdp-section-inner'>
+<div class='brand-seller-details-content'>
+<div class='brand-seller-container about-the-brand'>
+<h3 class='heading'>
+About
+MacKenzie-Childs
+</h3>
+<div class='divider'></div>
+<div class='brand-bio'>
+Since 1983, MacKenzie-Childs has made handcrafted ceramics, each piece a one-of-a-kind collectible. The company also designs and hand-decorates furniture and other home furnishings. Stains and glazes are painted on by hand, not by machine, making the talented artisans’ individuality evident on every piece that bears their stamp and the MacKenzie-Childs name.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='pdp-section pdp-product-context with-similar-products'>
+<div class='pdp-section-inner'>
+<h3 class='heading'>You May Also Like</h3>
+<div class='divider'></div>
+<ul class='similar-products-list'>
+<li class='standard product sortable live-event okl-exclusive-false similar-product-item index-0' data-lowestprice='70.0' data-product-id='4118432' data-sales-event-id='59172' id='product-tile-4118432'>
+<a class='trackProductPlacement instant-pdp-link' data-linkname='product_link' href='/product/59172/4118432'><div class='image'><img alt="Product_mfe10101_image_1?$small$" src="https://okl-scene7.insnw.net/is/image/OKL/Product_MFE10101_Image_1?$small$" /></div>
+<span class='urgency v2 strip' style='display: none'>
+<span class='count'></span>
+Left
+</span></a>
+<div class='product-info'>
+<a class='instant-pdp-link' data-linkname='product_link' href='/product/59172/4118432'>
+<h3>Flower Market Paper Towel Holder</h3>
+</a>
+<div class='price'>
+<em>$70.00</em>
+</div>
+</div>
+</li>
+
+<li class='standard product sortable live-event okl-exclusive-false similar-product-item index-1' data-lowestprice='70.0' data-product-id='4118424' data-sales-event-id='59172' id='product-tile-4118424'>
+<a class='trackProductPlacement instant-pdp-link' data-linkname='product_link' href='/product/59172/4118424'><div class='image'><img alt="Product_mfe10093_image_1?$small$" src="https://okl1-scene7.insnw.net/is/image/OKL/Product_MFE10093_Image_1?$small$" /></div>
+<span class='urgency v2 strip' style='display: none'>
+<span class='count'></span>
+Left
+</span></a>
+<div class='product-info'>
+<a class='instant-pdp-link' data-linkname='product_link' href='/product/59172/4118424'>
+<h3>Flower Market Paper Towel Holder</h3>
+</a>
+<div class='price'>
+<em>$70.00</em>
+</div>
+</div>
+</li>
+
+<li class='standard product sortable live-event okl-exclusive-false similar-product-item index-2' data-lowestprice='70.0' data-product-id='4118426' data-sales-event-id='59172' id='product-tile-4118426'>
+<a class='trackProductPlacement instant-pdp-link' data-linkname='product_link' href='/product/59172/4118426'><div class='image'><img alt="Product_mfe10095_image_1?$small$" src="https://okl1-scene7.insnw.net/is/image/OKL/Product_MFE10095_Image_1?$small$" /></div>
+<span class='urgency v2 strip' style='display: none'>
+<span class='count'></span>
+Left
+</span></a>
+<div class='product-info'>
+<a class='instant-pdp-link' data-linkname='product_link' href='/product/59172/4118426'>
+<h3>Flower Market Utensil Holder</h3>
+</a>
+<div class='price'>
+<em>$70.00</em>
+</div>
+</div>
+</li>
+
+<li class='standard product sortable live-event okl-exclusive-false similar-product-item index-3' data-lowestprice='25.0' data-product-id='2747809' data-sales-event-id='59277' id='product-tile-2747809'>
+<a class='trackProductPlacement instant-pdp-link' data-linkname='product_link' href='/product/59277/2747809'><div class='image'><img alt="Product_sjl10031_image_1?$small$" src="https://okl1-scene7.insnw.net/is/image/OKL/Product_SJL10031_Image_1?$small$" /></div>
+<span class='urgency v2 strip' style='display: none'>
+<span class='count'></span>
+Left
+</span></a>
+<div class='product-info'>
+<a class='instant-pdp-link' data-linkname='product_link' href='/product/59277/2747809'>
+<h3>Connect Utensil Holder, White</h3>
+</a>
+<div class='price'>
+<em>$25.00</em>
+</div>
+</div>
+</li>
+
+<li class='standard product sortable live-event okl-exclusive-false similar-product-item index-4' data-lowestprice='29.0' data-product-id='1976695' data-sales-event-id='59277' id='product-tile-1976695'>
+<a class='trackProductPlacement instant-pdp-link' data-linkname='product_link' href='/product/59277/1976695'><div class='image'><img alt="Product_lsk10408_image_1?$small$" src="https://okl1-scene7.insnw.net/is/image/OKL/Product_LSK10408_Image_1?$small$" /></div>
+<span class='urgency v2 strip' style='display: none'>
+<span class='count'></span>
+Left
+</span></a>
+<div class='product-info'>
+<a class='instant-pdp-link' data-linkname='product_link' href='/product/59277/1976695'>
+<h3>Olive Wood Utensil Holder</h3>
+</a>
+<div class='price'>
+<del>$44.00</del>
+<em>$29.00</em>
+</div>
+</div>
+</li>
+
+</ul>
+<div class='category-doorway clearfix sc-pdp-56'>
+<div class='sketch'>
+<a href="/kitchen-tabletop/cookware-tools/cooking-tools" class="image-link" data-linkname="pdp_category_doorway"><div class='subcat-img'></div>
+</a></div>
+<div class='text'>
+<h4 class='department-name'>
+Cooking Tools
+</h4>
+<a href="/kitchen-tabletop/cookware-tools/cooking-tools" class="see-all" data-linkname="pdp_category_doorway">See All &raquo;
+</a></div>
+</div>
+
+</div>
+</div>
+
+<div class='bloomreach-widget'>
+<div class='bloomreach-related-products'>
+<!-- BEGIN MORE-RESULTS -->
+<!-- END MORE-RESULTS -->
+</div>
+<div class='bloomreach-related-search'>
+<!-- BEGIN RELATED -->
+    <script type="text/javascript">var br_related_rid = "Rap2unt0xnhat1titdrhd-uf,r0,m0";</script>
+<script type="text/javascript">var br_iuid = "aHR0cHM6Ly93d3cub25la2luZ3NsYW5lLmNvbS9wcm9kdWN0LzU5MTcyLzQxMTg0MzUuaHRtbD9jYXQ9OTM=";</script>
+<!-- END RELATED -->
+</div>
+</div>
+
+
+</div>
+</div>
+<div id='footer'>
+<ul>
+<li>
+<a href="/corporate/about_us">About Us</a>
+</li>
+<li>
+<a href="/press">Press</a>
+</li>
+<li>
+<a href="/careers">Careers</a>
+</li>
+<li>
+Mobile:
+<a href="/apps/ipad">iPad</a>
+<span class='divider'>.</span>
+<a href="/apps/iphone">iPhone</a>
+</li>
+<li>
+<a href="/e-gift-card">Gift Card</a>
+</li>
+<li>
+<a href="/vendor-application">Become a Vendor</a>
+</li>
+<li>
+<a href="/shop/vintage_sellers">Vintage Vendors</a>
+</li>
+<li>
+<a href="/affiliates">Affiliates</a>
+</li>
+<li>
+<a href="/corporate/sitemap">Sitemap</a>
+</li>
+<li>
+<a href="http://help.onekingslane.com/customer/portal/topics/32819-shipping-delivery/articles">Shipping</a>
+</li>
+<li>
+<a href="http://help.onekingslane.com/customer/portal/articles/72357-return-policy">Return Policy</a>
+</li>
+<li class='last'>
+<a href='http://help.onekingslane.com' title='One Kings Lane - Assistly Help Portal'>Help</a>
+</li>
+</ul>
+<div id='oklCopyright'>
+<p>
+&copy; 2015 One Kings Lane&reg;, All rights reserved.
+<a href="/brands/terms-of-use">Terms of Use</a>
+ | 
+<a href="/brands/privacy">Privacy</a>
+ | 
+<a href="http://help.onekingslane.com/customer/portal/articles/1957499-legal-notices">Legal Notices</a>
+</p>
+<p>
+Tastemaker Tag Sales&trade; is a trademark of One Kings Lane Inc.
+<br>
+One Kings Lane and the elephant logo are registered trademarks of One Kings Lane Inc.
+</p>
+</div>
+</div>
+<a id='bottomAnchor'></a>
+
+<script>
+  //<![CDATA[
+    window.OKL.config = window.OKL.config || {}
+    window.OKL.config.current_controller = 'products'
+    window.OKL.config.current_action = 'show'
+    window.OKL.config.logged_in = false
+    window.OKL.config.current_user_id = null
+    window.OKL.config.customer_segments = {}
+    window.OKL.vars.emp = 'no'
+  //]]>
+</script>
+
+<script src="/assets/bundle/browse-4e106997bfac6f753606bd1a81c03114.js" type="text/javascript"></script>
+<script>
+_gaq.push(['_setAccount', 'UA-8792844-1']);
+
+_gaq.push(['_setSiteSpeedSampleRate', 5]);
+
+_gaq.push(['_setCustomVar', 20, 'Page Type', 'product', 2]);
+_gaq.push(['_setCustomVar', 23, 'Is User', '0', 1]);
+_gaq.push(['_setCustomVar', 24, 'Is Shopper', '0', 1]);
+_gaq.push(['_setCustomVar', 48, 'Customer ID', 'null', 2]);
+_gaq.push(['_setCustomVar', 47, 'Recency Segment', 'none', 2]);
+_gaq.push(['_setCustomVar', 29, 'P76 Variant', '2', 2]);
+_gaq.push(['_setCustomVar', 46, 'Test Bucket', '87', 2]);
+_gaq.push(['_setCustomVar', 49, 'SBS Segment', 'null', 2]);
+_gaq.push(['_setCustomVar', 50, 'Email Segment', '', 2]);
+_gaq.push(['_setCustomVar', 21, 'SKU ID', '2082372', 2]);
+_gaq.push(['_setCustomVar', 22, 'Total Amount', '70.0', 2]);
+
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+
+  ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  window.onerror = function (err, uri, line) {
+    _gaq.push(['_trackEvent', 'JavaScript Error', err, uri, line]);
+    $(document).trigger('jsError', { 'err': err, 'uri': uri, 'line': line });
+  }
+})();
+
+</script>
+
+<div id='fb-root'></div>
+</body>
+</html>
+<!--
+sac-prod1-stor-web-18.unix.newokl.com.11936.1438801780
+-->

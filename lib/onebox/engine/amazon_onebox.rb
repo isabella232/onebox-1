@@ -1,3 +1,5 @@
+require 'json'
+
 module Onebox
   module Engine
     class AmazonOnebox
@@ -6,7 +8,7 @@ module Onebox
       include HTML
 
 
-      matches_regexp(/^http:\/\/(?:www)\.amazon\.(?<tld>com|ca|de|it|es|fr|co\.jp|co\.uk|cn|in|com\.br)\//)
+      matches_regexp(/^https?:\/\/(?:www)\.amazon\.(?<tld>com|ca|de|it|es|fr|co\.jp|co\.uk|cn|in|com\.br)\//)
 
       def url
         return "http://www.amazon.#{tld}/gp/aw/d/" + URI::encode(match[:id]) if match && match[:id]
@@ -30,27 +32,32 @@ module Onebox
       def image
         case
         when raw.css("#main-image").any?
-          raw.css("#main-image").first["src"]
+          ::JSON.parse(
+            raw.css("#main-image").first
+              .attributes["data-a-dynamic-image"]
+              .value
+          ).keys.first
         when raw.css("#landingImage").any?
           raw.css("#landingImage").first["src"]
         end
       end
 
       def price
-        @price ||= (raw.css("#priceblock_ourprice").text || raw.css(".priceLarge").inner_text || "").strip
+        @price ||= raw.css("#priceblock_ourprice").inner_text
       end
 
       def data
         result = { link: link,
-                   title: raw.css("h1").inner_text.gsub(/(About this item).*/, ""),
+                   title: raw.css("title").inner_text,
                    image: image,
+                   price: price,
                    price_cents: Monetize.parse(price).cents }
 
         result[:by_info] = raw.at("#by-line")
         result[:by_info] = Onebox::Helpers.clean(result[:by_info].inner_html) if result[:by_info]
 
-        summary = raw.at("#about-item span")
-        result[:description] = summary.inner_html if summary
+        summary = raw.at("#productDescription")
+        result[:description] = summary.inner_text if summary
         result
       end
     end

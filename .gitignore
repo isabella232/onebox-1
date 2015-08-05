@@ -1,6 +1,7 @@
 *.gem
 *.rbc
 .bundle
+/.idea
 .config
 .yardoc
 Gemfile.lock
@@ -17,3 +18,4 @@ test/version_tmp
 tmp
 *.swp
 .ruby-version
+.DS_Store

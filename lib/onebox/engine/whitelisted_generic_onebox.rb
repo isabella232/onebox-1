@@ -16,8 +16,10 @@ module Onebox
       def self.default_whitelist
         %w(23hq.com
           500px.com
+          8tracks.com
           about.com
           answers.com
+          arstechnica.com
           ask.com
           battle.net
           bbc.co.uk
@@ -32,12 +34,12 @@ module Onebox
           cnn.com
           collegehumor.com
           coursera.org
-          codepen.io
           cracked.com
           dailymail.co.uk
           dailymotion.com
           deadline.com
           dell.com
+          deviantart.com
           digg.com
           dotsub.com
           ebay.ca
@@ -52,22 +54,25 @@ module Onebox
           forbes.com
           foxnews.com
           funnyordie.com
+          gfycat.com
           groupon.com
           howtogeek.com
           huffingtonpost.com
           huffingtonpost.ca
           hulu.com
           ign.com
+          ikea.com
+          imdb.com
           imgur.com
           indiatimes.com
           instagr.am
           instagram.com
           itunes.apple.com
-          justin.tv
           khanacademy.org
           kickstarter.com
           kinomap.com
           liveleak.com
+          livestream.com
           lessonplanet.com
           mashable.com
           meetup.com
@@ -75,6 +80,7 @@ module Onebox
           mlb.com
           myspace.com
           nba.com
+          nytimes.com
           npr.org
           photobucket.com
           pinterest.com
@@ -85,7 +91,6 @@ module Onebox
           screenr.com
           scribd.com
           slideshare.net
-          soundcloud.com
           sourceforge.net
           speakerdeck.com
           spotify.com
@@ -94,6 +99,7 @@ module Onebox
           ted.com
           thefreedictionary.com
           theglobeandmail.com
+          thenextweb.com
           theonion.com
           thestar.com
           thesun.co.uk
@@ -101,10 +107,13 @@ module Onebox
           tmz.com
           torontosun.com
           tumblr.com
+          twitch.tv
           twitpic.com
           usatoday.com
+          viddler.com
           videojug.com
           vimeo.com
+          vine.co
           walmart.com
           washingtonpost.com
           wikia.com
@@ -118,18 +127,32 @@ module Onebox
           zillow.com)
       end
 
-      # A re-written URL coverts https:// -> // - it is useful on HTTPS sites that embed
-      # youtube for example
+      # Often using the `html` attribute is not what we want, like for some blogs that
+      # include the entire page HTML. However for some providers like Imgur it allows us
+      # to return gifv and galleries.
+      def self.default_html_providers
+        ['Flickr', 'Imgur', 'Meetup']
+      end
+
+      def self.html_providers
+        @html_providers ||= default_html_providers.dup
+      end
+
+      def self.html_providers=(new_provs)
+        @html_providers = new_provs
+      end
+
+      # A re-written URL coverts http:// -> https://
       def self.rewrites
-        @rewrites ||= default_rewrites.dup
+        @rewrites ||= https_hosts.dup
       end
 
       def self.rewrites=(new_list)
         @rewrites = new_list
       end
 
-      def self.default_rewrites
-        %w(slideshare.net)
+      def self.https_hosts
+        %w(slideshare.net imgur.com dailymotion.com livestream.com)
       end
 
       def self.host_matches(uri, list)
@@ -156,33 +179,44 @@ module Onebox
 
       # Generates the HTML for the embedded content
       def photo_type?
-        data[:type] =~ /photo/ || data[:type] =~ /image/
+        ( (data[:type] =~ /photo/ || data[:type] =~ /image/) && data[:type] !~ /photostream/ )
       end
 
       def article_type?
         data[:type] == "article"
       end
 
-      def rewrite_agnostic(html)
+      def rewrite_https(html)
         return html unless html
         uri = URI(@url)
         if WhitelistedGenericOnebox.host_matches(uri, WhitelistedGenericOnebox.rewrites)
-          html.gsub!(/https?:\/\//, '//')
+          html.gsub!(/http:\/\//, 'https://')
         end
         html
       end
 
+      def html_type?
+        return data &&
+               data[:html] &&
+               (
+                 (data[:html] =~ /iframe/) ||
+                 WhitelistedGenericOnebox.html_providers.include?(data[:provider_name])
+               )
+      end
+
       def generic_html
-        return data[:html] if data[:html] && data[:html] =~ /iframe/
+        return data[:html] if html_type?
         return layout.to_html if article_type?
         return html_for_video(data[:video]) if data[:video]
+
         return image_html if photo_type?
+
         return nil unless data[:title]
         layout.to_html
       end
 
       def to_html
-        rewrite_agnostic(generic_html)
+        rewrite_https(generic_html)
       end
 
       def placeholder_html
@@ -237,12 +271,41 @@ module Onebox
 
 
         if video_url
-          html = "<iframe src=\"#{video_url}\" frameborder=\"0\" title=\"#{data[:title]}\""
+          # opengraph support multiple elements (videos, images ,etc).
+          # We attempt to find a video element with the type of video/mp4
+          # and generate a native <video> element for it.
 
-          append_attribute(:width, html, video)
-          append_attribute(:height, html, video)
+          if (@raw.metadata && @raw.metadata[:"video:type"])
+            video_type =  @raw.metadata[:"video:type"]
+            if video_type.include? "video/mp4"            # find if there is a video with type
+              if video_type.size > 1                      # if more then one video item based on provided video_type
+                ind = video_type.find_index("video/mp4")  # get the first video index with type video/mp4
+                video_url  = @raw.metadata[:video][ind]   # update video_url
+              end
 
-          html << "></iframe>"
+              attr = append_attribute(:width, attr, video)
+              attr = append_attribute(:height, attr, video)
+
+              site_name_and_title  =  ( ("<span style='color:#fff;background:#9B9B9B;border-radius:3px;padding:3px;margin-right: 5px;'>" + CGI::escapeHTML(@raw.metadata[:site_name][0].to_s) + '</span> ') + CGI::escapeHTML((@raw.title || @raw.description).to_s) )
+              orig_url = @raw.url
+              html_v2 = %Q(
+                <div style='position:relative;padding-top:29px;'>
+                <span style='position: absolute;top:0px;z-index:2;color:#000;white-space:nowrap;text-overflow:ellipsis;word-wrap: break-word;overflow: hidden;display: inline-block;padding: 3px;border-radius: 4px;max-width: 100%;'><a href='#{orig_url}' target='_blank'>#{site_name_and_title}</a></span>
+                <video style='max-width:100%' #{attr} title="#{data[:title]}" controls="" ><source src="#{video_url}"></video>
+                </div>
+                )
+              html = html_v2
+
+            else
+
+              html = "<iframe src=\"#{video_url}\" frameborder=\"0\" title=\"#{data[:title]}\""
+              append_attribute(:width, html, video)
+              append_attribute(:height, html, video)
+
+              html << "></iframe>"
+            end
+
+          end
           return html
         end
       end

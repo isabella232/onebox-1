@@ -10,12 +10,38 @@ module Onebox
       end.map(&method(:const_get))
     end
 
-    attr_reader :url
+    attr_reader :url, :uri
     attr_reader :cache
     attr_reader :timeout
 
+    DEFAULT = {}
+    def options
+      @options
+    end
+
+    def options=(opt)
+      return @options if opt.nil? #make sure options provided
+      if opt.instance_of? OpenStruct
+        @options = @options.merge(opt.to_h)
+      else
+       @options =  @options.merge(opt)
+      end
+      @options
+    end
+
+
     def initialize(link, cache = nil, timeout = nil)
+
+      @options = DEFAULT
+      class_name = self.class.name.split("::").last.to_s
+      self.options = Onebox.options[class_name] || {} #Set the engine options extracted from global options.
+
       @url = link
+      @uri = URI(link)
+      if always_https?
+        @uri.scheme = 'https'
+        @url = @uri.to_s
+      end
       @cache = cache || Onebox.options.cache
       @timeout = timeout || Onebox.options.timeout
     end
@@ -41,8 +67,9 @@ module Onebox
     private
 
     def record
-      result = cache.fetch(url) { data }
-      cache[url] = result if cache.respond_to?(:key?)
+      url_result = url
+      result = cache.fetch(url_result) { data }
+      cache[url_result] = result if cache.respond_to?(:key?)
       result
     end
 
@@ -59,13 +86,17 @@ module Onebox
     end
 
     def link
-      @url.gsub(/['\"<>]/, {
+      @url.gsub(/['\"&<>]/, {
         "'" => '&#39;',
         '&' => '&amp;',
         '"' => '&quot;',
         '<' => '&lt;',
         '>' => '&gt;',
       })
+    end
+
+    def always_https?
+      self.class.always_https?
     end
 
     module ClassMethods
@@ -90,25 +121,58 @@ module Onebox
         name.split("::").last.downcase.gsub(/onebox/, "")
       end
 
+      def always_https
+        @https = true
+      end
+
+      def always_https?
+        @https
+      end
     end
   end
 end
 
-require_relative "helpers"
-require_relative "layout_support"
-require_relative "engine/standard_embed"
-require_relative "engine/html_embed"
-require_relative "engine/html"
-require_relative "engine/json"
-require_relative "engine/amazon_onebox"
-require_relative "engine/image_onebox"
-require_relative "engine/whitelisted_generic_onebox"
+require_relative 'helpers'
+require_relative 'layout_support'
+require_relative 'file_type_finder'
+require_relative 'engine/standard_embed'
+require_relative 'engine/html_embed'
+require_relative 'engine/html'
+require_relative 'engine/json'
+require_relative 'engine/amazon_onebox'
+require_relative 'engine/github_issue_onebox'
+require_relative 'engine/github_blob_onebox'
+require_relative 'engine/github_commit_onebox'
+require_relative 'engine/github_gist_onebox'
+require_relative 'engine/github_pullrequest_onebox'
+require_relative 'engine/google_calendar_onebox'
+require_relative 'engine/google_docs_onebox'
+require_relative 'engine/google_maps_onebox'
+require_relative 'engine/google_play_app_onebox'
+require_relative 'engine/image_onebox'
+require_relative 'engine/video_onebox'
+require_relative 'engine/audio_onebox'
+require_relative 'engine/stack_exchange_onebox'
+require_relative 'engine/twitter_status_onebox'
+require_relative 'engine/wikipedia_onebox'
+require_relative 'engine/youtube_onebox'
+require_relative 'engine/youku_onebox'
+require_relative 'engine/douban_onebox'
+require_relative 'engine/whitelisted_generic_onebox'
+require_relative 'engine/pubmed_onebox'
+require_relative 'engine/soundcloud_onebox'
+
 # custom engines
-require_relative "engine/allmodern_onebox"
-require_relative "engine/CB2_onebox"
-require_relative "engine/crate_and_barrel_onebox"
-require_relative "engine/ikea_onebox"
-require_relative "engine/overstock_onebox"
-require_relative "engine/target_onebox"
-require_relative "engine/wayfair_onebox"
-require_relative "engine/world_market_onebox"
+require_relative 'engine/allmodern_onebox'
+require_relative 'engine/allmodern_sales_onebox'
+require_relative 'engine/CB2_onebox'
+require_relative 'engine/crate_and_barrel_onebox'
+require_relative 'engine/ikea_onebox'
+require_relative 'engine/one_kings_lane_onebox'
+require_relative 'engine/overstock_onebox'
+require_relative 'engine/pottery_barn_onebox'
+require_relative 'engine/restoration_hardware_onebox'
+require_relative 'engine/target_onebox'
+require_relative 'engine/wayfair_onebox'
+require_relative 'engine/west_elm_onebox'
+require_relative 'engine/world_market_onebox'
