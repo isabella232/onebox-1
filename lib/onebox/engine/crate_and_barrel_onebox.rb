@@ -6,6 +6,14 @@ module Onebox
 
       matches_regexp(/^http:\/\/(?:www)\.crateandbarrel\.com\//)
 
+      def price
+        og_raw.metadata[:'price:amount'].first
+      end
+
+      def price_cents
+        Monetize.parse(price).cents.to_s
+      end
+
       def data
         if og_raw.is_a?(Hash)
           og_raw[:link] ||= link
@@ -18,7 +26,8 @@ module Onebox
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
           description: og_raw.description,
           type: (og_raw.type if og_raw.type),
-          price_cents: Monetize.parse(raw.xpath("/html/head").xpath('//meta[@property="og:price:amount"]/@content').first.value).cents.to_s
+          price: price,
+          price_cents: price_cents
         }
       end
     end
