@@ -1,18 +1,18 @@
 module Onebox
   module Engine
-    class RestorationHardwareOnebox
+    class OneKingsLaneOnebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^http:\/\/(?:www)\.restorationhardware\.com\//)
+      matches_regexp(/^http:\/\/(?:www)\.onekingslane\.com\//)
 
       def title
         og_raw.title
       end
 
       def price
-        amount = raw.css('[itemprop=price]')[0]
-        amount && Onebox::Helpers.squish(amount.text)
+        price_element = raw.css('.price .ours')[0]
+        price_element && Onebox::Helpers.squish(price_element.text)
       end
 
       def price_cents
@@ -20,10 +20,8 @@ module Onebox
       end
 
       def image
-        image = raw.css('#default-photo')[0]
-        return unless image
-        src = image['src']
-        "http:#{src}"
+        image = raw.css('img#main-image')[0]
+        image && image['src']
       end
 
       def description
