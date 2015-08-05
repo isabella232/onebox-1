@@ -1,18 +1,17 @@
 module Onebox
   module Engine
-    class WayfairOnebox
+    class WestElmOnebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^http:\/\/(?:www)\.wayfair\.com\//)
+      matches_regexp(/^http:\/\/(?:www)\.westelm\.com\//)
 
       def title
         return og_raw.title if og_raw.title
-        raw.css('.title_name').inner_html.gsub(/<[^>]+>|\n|\s{2,}/, '')
       end
 
       def price
-        amount = raw.css('.dynamic_sku_price').text
+        amount = raw.css('.pip-summary .product-price').text
         amount.empty? ? nil : Onebox::Helpers.squish(amount)
       end
 
@@ -22,13 +21,13 @@ module Onebox
 
       def image
         return og_raw.images.first if og_raw.images && og_raw.images.first
-        images = raw.css('[data-large-src]')
-        images.first && images.first.attributes['data-large-src'].value
       end
 
       def description
         return og_raw.description if og_raw.description
-        Onebox::Helpers.squish(raw.css('.no_json_description').inner_text)
+        raw_description = raw.css('.pip-summary .accordion-tab-copy').inner_html
+        tag_break_index = raw_description.index("<p>")
+        Onebox::Helpers.squish(raw_description[0...tag_break_index || -1])
       end
 
       def type

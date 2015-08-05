@@ -95,5 +95,4 @@ describe Onebox::Engine::WhitelistedGenericOnebox do
       expect(html).to include("It was the most chilling image of the week")
     end
   end
-
 end

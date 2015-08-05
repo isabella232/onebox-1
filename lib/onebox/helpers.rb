@@ -55,5 +55,9 @@ module Onebox
     def self.click_to_scroll_div(width = 690, height = 400)
       "<div style=\"background:transparent;position:relative;width:#{width}px;height:#{height}px;top:#{height}px;margin-top:-#{height}px;\" onClick=\"style.pointerEvents='none'\"></div>"
     end
+
+    def self.squish(string)
+      string.strip.gsub(/\s+/, ' ')
+    end
   end
 end

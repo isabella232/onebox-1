@@ -11,7 +11,7 @@ module Onebox
     end
 
     def data
-      engine.try(:send, :data)
+      engine && engine.respond_to?(:send) ? engine.send(:data) : nil
     end
 
     def to_s
