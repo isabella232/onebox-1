@@ -164,6 +164,7 @@ require_relative 'engine/soundcloud_onebox'
 
 # custom engines
 require_relative 'engine/allmodern_onebox'
+require_relative 'engine/allmodern_sales_onebox'
 require_relative 'engine/CB2_onebox'
 require_relative 'engine/crate_and_barrel_onebox'
 require_relative 'engine/ikea_onebox'

@@ -1,25 +1,29 @@
+require 'htmlentities'
+
 module Onebox
   module Engine
     class AllmodernOnebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^http:\/\/(?:www)\.allmodern\.com\//)
+      matches_regexp(/^http:\/\/(?:www)\.allmodern\.com\/(?!deals-and-design-ideas)/)
 
       def title
-        og_raw.title || raw.css('span.title_name').inner_html
+        title_element = raw.css('.title_name')[0]
+        return unless title_element
+        Onebox::Helpers.squish(title_element.text)
       end
 
       def image
-        og_raw.images && og_raw.images.first || raw.css('img.product_main_img').first['src']
+        return og_raw.images.first if og_raw.images.any?
+        img = raw.css('.mainpdimg img').first
+        img ? img['src'] : nil
       end
 
       def description
-        return unless raw.css(".pdp_romance_copy").any?
-
-        HTMLEntities.new.decode(raw.css(".pdp_romance_copy")[0].inner_html).
-          gsub(/<[^>]+>|\s{2,}/,' ').
-          gsub(/^\s+|\s+$/,'')
+        description_element = raw.css('.product_section_description')[0]
+        return unless description_element
+        Onebox::Helpers.squish(description_element.text)
       end
 
       def type
@@ -27,8 +31,13 @@ module Onebox
       end
 
       def price
-        amount = raw.xpath('/html/head/meta[@property="og:price:amount"]/@content')
-        !amount.empty? && Monetize.parse(amount).cents.to_s
+        price_element = raw.css('.product_price')[0]
+        return unless price_element
+        Onebox::Helpers.squish(price_element.text)
+      end
+
+      def price_cents
+        price.to_s.empty? ? nil : Monetize.parse(price).cents.to_s
       end
 
       def data
@@ -43,7 +52,8 @@ module Onebox
           image: image,
           description: description,
           type: type,
-          price_cents: price
+          price_cents: price_cents,
+          price: price
         }
       end
     end
