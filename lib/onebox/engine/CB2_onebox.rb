@@ -7,10 +7,13 @@ module Onebox
       matches_regexp(/^http:\/\/(?:www)\.cb2\.com\//)
 
       def price
-        price_main = raw.css('#_productWrap span.regPrice')[0]
-        unless price_main.inner_html.include? "-"
-          Monetize.parse(price_main).cents.to_s
-        end
+        price_element = raw.css('#_productWrap span.regPrice')[0]
+        price_element ? price_element.text : nil
+      end
+
+      def price_cents
+        return if price.include? '-'
+        Monetize.parse(price).cents.to_s
       end
 
       def data
@@ -25,7 +28,8 @@ module Onebox
           image: (og_raw.images.first if og_raw.images && og_raw.images.first),
           description: og_raw.description,
           type: (og_raw.type if og_raw.type),
-          price_cents: price
+          price: price,
+          price_cents: price_cents
         }
       end
     end
