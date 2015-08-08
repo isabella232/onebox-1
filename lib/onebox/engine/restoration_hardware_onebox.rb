@@ -4,7 +4,7 @@ module Onebox
       include Engine
       include HTMLEmbed
 
-      matches_regexp(/^http:\/\/(?:www)\.restorationhardware\.com\//)
+      matches_regexp(/^https:\/\/(?:www)\.restorationhardware\.com\//)
 
       def title
         og_raw.title
