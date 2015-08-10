@@ -7,7 +7,7 @@ module Onebox
       matches_regexp(/^http:\/\/(?:www)\.westelm\.com\//)
 
       def title
-        return og_raw.title if og_raw.title
+        og_raw.title if og_raw.title
       end
 
       def price
@@ -20,7 +20,7 @@ module Onebox
       end
 
       def image
-        return og_raw.images.first if og_raw.images && og_raw.images.first
+        og_raw.images.first if og_raw.images && og_raw.images.first
       end
 
       def description
@@ -35,11 +35,6 @@ module Onebox
       end
 
       def data
-        if og_raw.is_a?(Hash)
-          og_raw[:link] ||= link
-          return og_raw
-        end
-
         {
           link: link,
           title: title,

@@ -31,7 +31,6 @@ module Onebox
 
 
     def initialize(link, cache = nil, timeout = nil)
-
       @options = DEFAULT
       class_name = self.class.name.split("::").last.to_s
       self.options = Onebox.options[class_name] || {} #Set the engine options extracted from global options.

@@ -1,3 +1,5 @@
+require 'pry'
+
 module Onebox
   class Preview
     attr_reader :cache
